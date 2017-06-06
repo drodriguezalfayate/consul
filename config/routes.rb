@@ -45,22 +45,22 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :proposals do
-    member do
-      post :vote
-      post :vote_featured
-      put :flag
-      put :unflag
-      get :retire_form
-      get :share
-      patch :retire
-    end
-    collection do
-      get :map
-      get :suggest
-      get :summary
-    end
-  end
+#  resources :proposals do
+#    member do
+#      post :vote
+#      post :vote_featured
+#      put :flag
+#      put :unflag
+#      get :retire_form
+#      get :share
+#      patch :retire
+#    end
+#    collection do
+#      get :map
+#      get :suggest
+#      get :summary
+#    end
+#  end
 
   resources :comments, only: [:create, :show], shallow: true do
     member do
@@ -118,7 +118,7 @@ Rails.application.routes.draw do
   resource :verification, controller: "verification", only: [:show]
 
   scope module: :verification do
-    resource :residence, controller: "residence", only: [:new, :create]
+#    resource :residence, controller: "residence", only: [:new, :create]
     resource :sms, controller: "sms", only: [:new, :create, :edit, :update]
     resource :verified_user, controller: "verified_user", only: [:show]
     resource :email, controller: "email", only: [:new, :show, :create]
@@ -380,4 +380,8 @@ Rails.application.routes.draw do
   # static pages
   get '/blog' => redirect("http://blog.consul/")
   resources :pages, path: '/', only: [:show]
+
+  get 'participatory_budget/welcome', to: 'pages#show', id: 'participatory_budget/welcome'
+
 end
+

@@ -53,7 +53,8 @@ $small-font-size:     rem-calc(14);
 $line-height:         rem-calc(24);
 $tiny-font-size:      rem-calc(12);
 
-$brand:             #004A83;
+$brand:             #E6118F;
+$brand2:	    #FFDB0A;
 $dark:              darken($brand, 10%);
 
 $text:              #222222;
@@ -76,10 +77,10 @@ $check:             #46DB91;
 $proposals:         #FFA42D;
 $proposals-dark:    #794500;
 
-$budget:            #7E328A;
+$budget:            #BC237E;
 $budget-hover:      #7571BF;
 
-$highlight:         #E7F2FC;
+$highlight:         #FFFFFF;
 $light:             #F5F7FA;
 $featured:          #FFDC5C;
 
@@ -89,8 +90,8 @@ $success-bg:        #DFF0D8;
 $success-border:    #D6E9C6;
 $color-success:     #3C763D;
 
-$info-bg:           #D9EDF7;
-$info-border:       #BCE8F1;
+$info-bg:           #F7D9EA;
+$info-border:       #F1BCDA;
 $color-info:        #31708F;
 
 $warning-bg:        #FCF8E3;
@@ -122,7 +123,7 @@ $black: #222222;
 $white: #ffffff;
 $body-background: $white;
 $body-font-color: $black;
-$body-font-family: 'Source Sans Pro', 'Helvetica', 'Arial', sans-serif !important;
+$body-font-family: 'Nunito Light', 'Open Sans', 'Source Sans Pro', 'Helvetica', 'Arial', sans-serif !important;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -160,7 +161,7 @@ $block-grid-max: 8;
 // 4. Base Typography
 // ------------------
 
-$header-font-family: $body-font-family;
+$header-font-family: 'Nunito Bold', $body-font-family;
 $header-font-weight: $global-weight-normal;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
@@ -182,11 +183,11 @@ $header-sizes: (
     'h6': 13,
   ),
 );
-$header-color: inherit;
+$header-color: $brand;
 $header-lineheight: 1.4;
 $header-margin-bottom: 0.5rem;
 $header-text-rendering: optimizeLegibility;
-$small-font-size: rem-calc(14);
+$small-font-size: rem-calc(12);
 $header-small-font-color: $medium-gray;
 $paragraph-lineheight: 1.6;
 $paragraph-margin-bottom: 1rem;

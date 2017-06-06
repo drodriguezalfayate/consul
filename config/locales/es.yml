@@ -209,8 +209,11 @@ es:
         other: Tienes %{count} notificaciones nuevas
       no_notifications: No tienes notificaciones nuevas
       open: abierto
-      open_city_slogan_html: Existen ciudades gobernadas directamente por sus habitantes, que <strong>debaten</strong> sobre temas que les preocupan, <strong>proponen</strong> ideas para mejorar sus vidas y <strong>deciden</strong> entre todas y todos las que se llevan a cabo.
-      open_city_title: La ciudad que quieres será la ciudad que quieras.
+      open_city_slogan_html: Nadie conoce mejor las necesidades de un barrio como sus propios vecinos y vecinas.<br>Por ello, te animamos a tomar parte de los <b>Presupuestos Participativos</b> donde con <b>TU VOZ</b> podrás tomar decisiones sobre en qué se invierte una parte del presupuesto municipal.
+      open_city_title: "Presupuestos Participativos:"
+      open_city_subtitle: "TU VOZ en el Ayuntamiento de Valladolid"
+      tu_decides_title: "Ahora tú decides cómo mejorar tu barrio con los"
+      tu_decides_title_2: "Presupuestos Participativos"
       open_gov: Gobierno %{open}
       proposals: Propuestas
       poll_questions: Votaciones

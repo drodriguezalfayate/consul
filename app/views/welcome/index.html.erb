@@ -2,50 +2,42 @@
   <%= render "shared/canonical", href: root_url %>
 <% end %>
 
-<div class="expanded highlight padding no-margin-top">
+<div class="expanded highlight no-margin-top">
   <div class="row">
-    <div class="small-12 medium-6 column">
-      <h1><%= t("layouts.header.open_city_title") %></h1>
+    <div class="small-12 medium-6 column margin-top">
+      <h2><%= t("layouts.header.open_city_title") %></h2>
+      <h3><%= t("layouts.header.open_city_subtitle") %></h3>
       <p>
         <%= t("layouts.header.open_city_slogan_html") %>&nbsp;
-        <%= link_to t("layouts.header.more_info"), more_info_path %>
       </p>
       <div class="small-12 medium-6">
-        <%= link_to t("layouts.header.see_all"), proposals_path, class: "button see-more expanded" %>
+        <%= link_to t("layouts.header.more_info"), more_info_path, class: "button see-more expanded" %>
       </div>
     </div>
 
     <div class="hide-for-small-only small-12 medium-5 column text-center">
-      <%= image_tag(image_path_for("icon_home.png"), size: "330x240", alt:"") %>
+      <%= image_tag(image_path_for("icon_home.png"), size: "353x257", alt:"") %>
     </div>
   </div>
 </div>
 
 <% cache [locale_and_user_status, @featured_debates, @featured_proposals, 'featured'] do %>
   <main>
-    <div class="row text-center margin">
-      <div class="small-12 medium-3 column">
-        <%= image_tag("icon_home_debate.png", size: "168x168", alt: "", title: t("welcome.debates.title")) %>
-        <h2><%= t("welcome.debates.title") %></h2>
-        <p><%= t("welcome.debates.description") %></p>
-
+    <div class="row background_brand expanded">
+    <div class="row">
+      <div class="small-12 medium-6 column margin-top margin-bottom">
+        <%= image_tag(image_path_for("logo_tu_voz_va.png"), size: "439x155", alt:"") %>	
       </div>
-      <div class="small-12 medium-3 column">
-        <%= image_tag("icon_home_proposal.png", size: "168x168", alt: "", title: t("welcome.proposal.title"))  %>
-        <h2><%= t("welcome.proposal.title") %></h2>
-        <p><%= t("welcome.proposal.description") %></p>
-      </div>
-
-      <div class="small-12 medium-3 column">
-        <%= image_tag("icon_home_decide.png", size: "168x168", alt: "", title: t("welcome.decide.title")) %>
-        <h2><%= t("welcome.decide.title") %></h2>
-        <p><%= t("welcome.decide.description") %></p>
-      </div>
-      <div class="small-12 medium-3 column">
-        <%= image_tag("icon_home_do.png", size: "168x168", alt: "", title: t("welcome.do.title")) %>
-        <h2><%= t("welcome.do.title") %></h2>
-        <p><%= t("welcome.do.description") %></p>
-      </div>
+      <div class="small-12 medium-6 column margin-top margin-bottom">
+        <div class="margin"></div>
+	<h4>
+          Ahora <b>tú decides</b> cómo mejorar tu barrio con los 
+        </h4>
+        <h2 class="color_brand_2">
+          <%= t("layouts.header.tu_decides_title_2") %>
+        </h2>
+      </div> 
+    </div>
     </div>
   </main>
 <% end %>

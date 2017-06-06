@@ -1,5 +1,291 @@
+
 // Overrides and adds customized styles in this file
 // Read more on documentation:
 // * English: https://github.com/consul/consul/blob/master/CUSTOMIZE_EN.md#css
 // * Spanish: https://github.com/consul/consul/blob/master/CUSTOMIZE_ES.md#css
-//
+
+
+// 01. Global styles
+// -----------------
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700; font-weight: 900;
+}
+
+.button {
+	&:hover {
+		background: $dark;
+	}
+	&:focus {
+		background: $dark;
+	}
+}
+
+.wrapper {
+	.padding {
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+}
+
+// 02. Header
+// ----------
+
+header{
+	background: #ebebeb;
+	border-bottom: 0;
+}
+
+.top-bar {
+  background: #ebebeb !important;
+  color: $brand;
+  height: $line-height*2;
+  line-height: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+
+  @include breakpoint(medium) {
+    padding: 0;
+  }
+
+  .top-bar-title a {
+    @include logo;
+    line-height: rem-calc(80) !important;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  ul {
+    background: none;
+    padding-right: rem-calc(15);
+
+    &.menu > li {
+      display: block;
+
+      @include breakpoint(medium) {
+        display: table-cell;
+        height: $line-height*3.5;
+      }
+
+      a {
+        color: #4d4d4d;
+        padding-left: 0;
+
+        @include breakpoint(medium) {
+          font-size: $small-font-size;
+          padding: rem-calc(11) rem-calc(15);
+        }
+
+        &.button {
+          text-align: left;
+
+          @include breakpoint(medium) {
+            background: $brand;
+            color: white;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  .menu-icon.dark {
+    height: 20px;
+
+    &::after, &:hover::after {
+      background: white;
+      box-shadow: 0 7px 0 white, 0 14px 0 white;
+    }
+  }
+}
+
+.top-links{
+	background: $brand;
+}
+
+
+.background_brand {
+	background-color: $brand;
+	color: white;
+	h1, h3, h4, h5, h6 {
+		color: white;
+	}
+	h2{
+		color: $brand2;
+	}
+	b {
+		color: $brand2;
+	}
+}
+
+.subnavigation {
+
+  background-color: $brand;
+
+  @include breakpoint(medium) {
+    background: &brand;
+    padding-bottom: 0;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+
+    li {
+      @include breakpoint(medium) {
+        display: inline-block;
+        margin-right: rem-calc(36);
+      }
+
+      a {
+        color: white;
+        display: inline-block;
+        line-height: $line-height*2;
+        position: relative;
+        text-align: left;
+        width: 100%;
+
+        @include breakpoint(medium) {
+          color: white;
+          display: block;
+          font-weight: bold;
+          width: auto;
+
+          &:hover {
+            color: $brand2;
+          }
+        }
+	&:focus {
+	  color: $brand2;
+	}
+
+        &.active {
+          color: $brand2;
+
+          @include breakpoint(medium) {
+            border-bottom: 2px solid $brand;
+            color: $brand2;
+          }
+        }
+      }
+    }
+  }
+
+  .input-group {
+    padding-top: $line-height/4;
+
+    @include breakpoint(medium) {
+      margin-bottom: 0;
+    }
+  }
+
+  .input-group-field {
+    margin-bottom: 0 !important;
+  }
+
+  .input-group-button {
+    line-height: $line-height*1.5;
+    padding-bottom: 0;
+
+    button {
+      background: $border;
+      border: 1px solid #ccc;
+      border-left: 0;
+      color: $text;
+      height: $line-height*1.5;
+      line-height: $line-height*1.5;
+      padding-top: 0;
+    }
+  }
+
+  input {
+    height: $line-height*1.5 !important;
+    margin-bottom: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
+
+
+.footer {
+  background: #ebebeb;
+  margin-top: 0;
+}
+
+// 05. Auth pages
+// --------------
+
+#logos_login {
+	max-width: none;
+}
+
+.auth-image {
+	h1 {
+		img{
+			height: none;
+			width: none;
+		}
+	}
+}
+
+
+
+////////////////////////
+// PARTICIPATION.SCSS //
+////////////////////////
+
+.expanded.budget {
+	background-image: image-url("header_va_proposals.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+
+}
+
+.jumbo-budget {
+
+	background-image: image-url("header_va_proposals.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+
+}
+
+.wrapper .padding {
+	padding-top: 1.5em;
+}
+
+////////////////////////
+// ADMINISTRADOR      //
+////////////////////////
+
+body.admin header .top-links{
+	background: #d3b700 !important;
+//	padding-bottom: 0.3em;
+}
+body.admin .top-bar {
+	background: #ffdd00 !important;
+}
+.admin-sidebar ul [class^="icon-"]{
+	color: black;
+}
+
+////////////////////////
+// INFORMACION        //
+////////////////////////
+
+.budgets-calendar ul li {
+	border-left: 1px solid #606F5D;
+	border-top: 0;
+	display: inline-block;
+	padding: 0.75rem 1.5rem;
+	
+}
