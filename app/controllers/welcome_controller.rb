@@ -3,11 +3,11 @@ class WelcomeController < ApplicationController
 
   layout "devise", only: [:welcome, :verification]
 
-  def index
-    if current_user
-      redirect_to :budgets
-    end
-  end
+#  def index
+#    if current_user
+#      redirect_to :budgets
+#    end
+#  end
 
   def welcome
   end

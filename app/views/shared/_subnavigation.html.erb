@@ -22,12 +22,17 @@
                                   accesskey: "3" %>
       </li>
     <% end %>
+
+    <li>
+      <%= layout_menu_link_to t("layouts.header.inicio"), '/', controller_name == 'welcome', accesskey: "1" %>
+    </li>
+
     <% if feature?(:spending_proposals) %>
       <li>
         <%= layout_menu_link_to t("layouts.header.spending_proposals"),
                                   spending_proposals_path,
                                   controller_name == 'spending_proposals',
-                                  accesskey: "s" %>
+                                  accesskey: "2" %>
       </li>
     <% end %>
     <% if feature?(:budgets) %>
@@ -41,7 +46,7 @@
     <li>
       <%= link_to t("layouts.header.more_info"),
                     more_info_path,
-                    accesskey: "5",
+                    accesskey: "3",
                     class: ("active" if current_page?(more_info_path)) %>
     </li>
   </ul>

@@ -184,16 +184,16 @@ es:
       privacy: Política de privacidad
       transparency_text: Obtén cualquier información sobre la ciudad.
       transparency_title: Transparencia
-      transparency_url: https://transparency.consul
+      transparency_url: https://www.valladolid.es/es/ayuntamiento/portal-transparencia
     header:
       administration: Administrar
       available_locales: Idiomas disponibles
       debates: Debates
       external_link_blog: Blog
       external_link_opendata: Datos abiertos
-      external_link_opendata_url: https://opendata.consul
+      external_link_opendata_url: https://www.valladolid.es/es/temas/hacemos/open-data-datos-abiertos
       external_link_transparency: Transparencia
-      external_link_transparency_url: https://transparency.consul
+      external_link_transparency_url: https://www.valladolid.es/es/ayuntamiento/portal-transparencia
       locale: 'Idioma:'
       logo: Consul logo
       management: Gestión
@@ -201,6 +201,7 @@ es:
       valuation: Evaluación
       officing: Presidentes de mesa
       more_info: Más información
+      calendar: Ver calendario
       my_account_link: Mi cuenta
       my_activity_link: Mi actividad
       notifications: Notificaciones
@@ -219,6 +220,7 @@ es:
       poll_questions: Votaciones
       see_all: Ver propuestas
       budgets: Presupuestos participativos
+      inicio: Inicio
       spending_proposals: "Propuestas de inversión"
   legislation:
     help:
