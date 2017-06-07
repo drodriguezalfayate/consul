@@ -5,9 +5,9 @@ es:
     conditions: Condiciones de uso
     general_terms: Términos y Condiciones
     more_info:
-      title: "Descubre %{org_name}"
-      subtitle: "Aprende todo lo que puedes hacer en esta web."
-      guide: 'Esta guía explica cada una de las secciones de %{org_name}. Puedes ampliar la información en los enlaces de "Información detallada".'
+      title: "Tu voz VA!"
+      subtitle: "Información sobre los presupuestos participativos."
+      guide: "Esta sección presenta brevemente los presupuestos participativos. Puedes ampliar la información en los enlaces situados en la parte inferior de esta página." 
       menu:
         debates: "Debates"
         proposals: "Propuestas"
