@@ -52,7 +52,7 @@ es:
         description: "Lee las preguntas frecuentes y resuelve tus dudas."
         button: "Ver preguntas frecuentes"
       other:
-        how_to_use: "Utiliza %{org_name} en tu municipio"
+        how_to_use: "Soluciones a problemas técnicos (FAQ)"
         world: "Participación ciudadana directa en el mundo"
         facts: "Hechos sobre participación ciudadana y democracia directa"
       how_to_use:

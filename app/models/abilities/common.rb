@@ -18,14 +18,14 @@ module Abilities
       end
       can [:retire_form, :retire], Proposal, author_id: user.id
 
-      can :create, Comment
+      #can :create, Comment
       can :create, Debate
       can :create, Proposal
 
       can :suggest, Debate
       can :suggest, Proposal
 
-      can [:flag, :unflag], Comment
+      #can [:flag, :unflag], Comment
       cannot [:flag, :unflag], Comment, user_id: user.id
 
       can [:flag, :unflag], Debate
@@ -36,8 +36,11 @@ module Abilities
 
       unless user.organization?
         can :vote, Debate
-        can :vote, Comment
+      #  can :vote, Comment
       end
+
+      can :create, Budget::Investment,               budget: { phase: "accepting" }
+      can :destroy, Budget::Investment,              budget: { phase: ["accepting", "reviewing"] }, author_id: user.id
 
       if user.level_two_or_three_verified?
         can :vote, Proposal
@@ -45,8 +48,6 @@ module Abilities
         can :vote, SpendingProposal
         can :create, SpendingProposal
 
-        can :create, Budget::Investment,               budget: { phase: "accepting" }
-        can :destroy, Budget::Investment,              budget: { phase: ["accepting", "reviewing"] }, author_id: user.id
         can :vote,   Budget::Investment,               budget: { phase: "selecting" }
         can [:show, :create], Budget::Ballot,          budget: { phase: "balloting" }
         can [:create, :destroy], Budget::Ballot::Line, budget: { phase: "balloting" }
