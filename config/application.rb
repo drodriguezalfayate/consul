@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 module Consul
   class Application < Rails::Application
 
-    config.route_directory = '/presupuestosparticipativos'
+    config.root_directory = '/presupuestosparticipativos'
     config.assets.prefix   = '/presupuestosparticipativos/assets/'
 
     # Settings in config/environments/* take precedence over those specified here.
