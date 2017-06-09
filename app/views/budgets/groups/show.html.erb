@@ -2,11 +2,39 @@
   <%= render "shared/canonical", href: budget_group_url(filter: @current_filter) %>
 <% end %>
 
+
 <div class="expanded budget no-margin-top">
-  <div class="row">
-    <div class="small-12 medium-9 column padding">
-      <%= back_link_to budget_path(@budget) %>
-      <h2><%= t("budgets.groups.show.title") %></h2>
+  <div class="row" data-equalizer data-equalizer-on="medium">
+    <div class="small-12 medium-9 column padding" data-equalizer-watch>
+
+      <h1><%= @budget.name %></h1>
+
+      <%= safe_html_with_links @budget.description %>
+    </div>
+    <div class="small-12 medium-3 column info padding" data-equalizer-watch>
+      <p>
+        <strong><%= t('budgets.show.phase') %></strong>
+      </p>
+      <h2><%= t("budgets.phase.#{@budget.phase}") %></h2>
+
+      <% if @budget.accepting? %>
+        <% if current_user && can?(:create, Budget::Investment.new(budget: @budget))%>
+            <%= link_to t("budgets.investments.index.sidebar.create"), new_budget_investment_path(@budget), class: "button margin-top expanded" %>
+        
+        <% else %>
+          <div class="callout primary margin-top">
+            <%= t("budgets.investments.index.sidebar.not_logged_in",
+                  sign_in: link_to(t("budgets.investments.index.sidebar.sign_in"), new_user_session_path),
+                  sign_up: link_to(t("budgets.investments.index.sidebar.sign_up"), new_user_registration_path)).html_safe %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if @budget.finished? %>
+        <%= link_to t("budgets.show.see_results"),
+                    budget_results_path(@budget, heading_id: @budget.headings.first),
+                    class: "button margin-top expanded" %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -27,21 +55,25 @@
 
 <div class="row margin">
   <div id="select-district" class="small-12 medium-7 column select-district">
-    <div class="row">
-      <% @group.headings.each_slice(7) do |slice| %>
-        <div class="small-6 medium-4 column end">
-          <% slice.each do |heading| %>
-            <span id="<%= dom_id(heading) %>"
-                  class="<%= css_for_ballot_heading(heading) %>">
-              <%= link_to heading.name,
-                          budget_investments_path(heading_id: heading.id,
-                                                  filter: @current_filter),
-                          data: { no_turbolink: true } %><br>
-            </span>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <table class="table-fixed tabla-zonas">
+      <thead>
+        <tr>
+          <th>
+            Selecciona una Zona
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @group.headings.each do |heading| %>
+          <tr>
+            <td>
+              <%= link_to heading.name, budget_investments_path(heading_id: heading.id, filter: @current_filter), data: { no_turbolink: true } %><br>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      
+    </table>
   </div>
 
   <div class="medium-5 column show-for-medium text-center">

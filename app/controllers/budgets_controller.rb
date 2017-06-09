@@ -9,10 +9,17 @@ class BudgetsController < ApplicationController
   respond_to :html, :js
 
   def show
+    if @budget.groups.count == 1
+      redirect_to budget_group_path(@budget, @budget.groups[0])
+    end
+
   end
 
   def index
     @budgets = @budgets.order(:created_at)
+    if @budgets.count == 1
+      redirect_to @budgets[0]
+    end
   end
 
 end
