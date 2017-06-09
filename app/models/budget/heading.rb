@@ -11,6 +11,7 @@ class Budget
     delegate :budget, :budget_id, to: :group, allow_nil: true
 
     scope :order_by_group_name, -> { includes(:group).order('budget_groups.name', 'budget_headings.name') }
+    scope :order_by_id, -> { includes(:group).order('budget_groups.id', 'budget_headings.id') }
 
     def name_scoped_by_group
       "#{group.name}: #{name}"

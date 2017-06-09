@@ -24,7 +24,7 @@
     <% end %>
 
     <li>
-      <%= layout_menu_link_to t("layouts.header.inicio"), root_url, controller_name == 'welcome', accesskey: "1" %>
+      <%= layout_menu_link_to t("layouts.header.inicio"), root_url + '/', controller_name == 'welcome', accesskey: "1" %>
     </li>
 
     <% if feature?(:spending_proposals) %>
