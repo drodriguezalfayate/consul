@@ -126,7 +126,7 @@ header{
   background-color: $brand;
 
   @include breakpoint(medium) {
-    background: &brand;
+    background: $brand;
     padding-bottom: 0;
   }
 
