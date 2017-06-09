@@ -49,4 +49,4 @@ module Consul
   end
 end
 
-require "./config/application_custom.rb"
+# require "./config/application_custom.rb"
