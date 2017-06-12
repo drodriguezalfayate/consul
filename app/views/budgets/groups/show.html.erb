@@ -54,7 +54,7 @@
 <% end %>
 
 <div class="row margin">
-  <div id="select-district" class="small-12 medium-7 column select-district">
+  <div id="select-district" class="small-12 medium-6 column select-district">
     <table class="table-fixed tabla-zonas">
       <thead>
         <tr>
@@ -64,7 +64,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @group.headings.order_by_id.each do |heading| %>
+        <% @group.headings.each do |heading| %>
           <tr>
             <td>
               <%= link_to heading.name, budget_investments_path(heading_id: heading.id, filter: @current_filter), data: { no_turbolink: true } %><br>
@@ -76,8 +76,10 @@
     </table>
   </div>
 
-  <div class="medium-5 column show-for-medium text-center">
-    <%= image_tag "map.jpg" %>
+  <div class="medium-6 column text-center">
+    <h3>Zonas de participación.</h3>
+    <p>Pulsa <%= link_to "aquí", asset_url('map_big.png') , target: "_blank" %> para ver el mapa con detalle.</p>
+    <%= image_tag "map.png" %>
   </div>
 </div>
 
