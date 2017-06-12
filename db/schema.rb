@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612201951) do
+ActiveRecord::Schema.define(version: 20170612203247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20170612201951) do
     t.string  "name",       limit: 50
     t.integer "price",      limit: 8
     t.string  "short_name", limit: 100
+    t.string  "long_name",  limit: 1000
   end
 
   add_index "budget_headings", ["group_id"], name: "index_budget_headings_on_group_id", using: :btree
