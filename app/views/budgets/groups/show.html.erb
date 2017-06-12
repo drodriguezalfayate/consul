@@ -67,7 +67,7 @@
         <% @group.headings.each do |heading| %>
           <tr>
             <td>
-              <%= link_to heading.name, budget_investments_path(heading_id: heading.id, filter: @current_filter), data: { no_turbolink: true } %><br>
+              <%= link_to heading.short_name, budget_investments_path(heading_id: heading.id, filter: @current_filter), data: { no_turbolink: true } %><br>
             </td>
           </tr>
         <% end %>
