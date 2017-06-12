@@ -29,7 +29,7 @@
       <td class="small">
         <span class="icon-eye"></span>
         <% if page.status == "published" %>
-          <%= link_to t("admin.site_customization.pages.index.see_page"), page.url, target: "_blank" %>
+          <%= link_to t("admin.site_customization.pages.index.see_page"), root_url + page.url, target: "_blank" %>
         <% else %>
           <%=  t("admin.site_customization.pages.index.see_page") %>
         <% end %>
