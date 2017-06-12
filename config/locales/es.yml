@@ -175,9 +175,9 @@ es:
       conditions: Condiciones de uso
       consul: aplicación Consul
       consul_url: https://github.com/consul/consul
-      contact_us: Para asistencia técnica entra en
+      contact_us: Puedes consultar las preguntas más frecuentes de este portal en 
       copyright: Ayuntamiento de Valladolid, %{year}
-      description: Este portal usa la %{consul} que es %{open_source}.
+      description: Este portal es una adaptación de la %{consul} de %{open_source} desarrollada por el Ayuntamiento de Madrid y adaptada por el Ayuntamiento de Valladolid.
       faq: Asistencia técnica
       open_data_text: Todos los datos del Ayuntamiento son tuyos.
       open_data_title: Datos Abiertos
