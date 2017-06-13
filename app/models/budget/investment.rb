@@ -244,6 +244,16 @@ class Budget
       investments
     end
 
+    def summary_description
+      full_sanitizer = Rails::Html::FullSanitizer.new
+      summary=full_sanitizer.sanitize(description).delete("\n").delete("\r").delete("\t")[0..300]
+      if (summary.length>=300) 
+        "#{summary}..."
+      else
+        summary
+      end
+    end
+
     private
 
       def set_denormalized_ids
