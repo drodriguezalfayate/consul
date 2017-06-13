@@ -79,7 +79,7 @@
   <div class="medium-6 column text-center">
     <h3>Zonas de participación.</h3>
     <p>Pulsa <%= link_to "aquí", asset_url('map_big.png') , target: "_blank" %> para ver el mapa con detalle.</p>
-    <%= image_tag "map.png" %>
+    <a href="<%=asset_url('map_big.png')%>" target="_blank"> <%= image_tag "map.png" %></a>
   </div>
 </div>
 
