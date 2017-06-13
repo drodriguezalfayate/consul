@@ -64,7 +64,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @group.headings.each do |heading| %>
+        <% @group.headings.order_by_id.each do |heading| %>
           <tr>
             <td>
               <%= link_to heading.long_name, budget_investments_path(heading_id: heading.id, filter: @current_filter), data: { no_turbolink: true } %><br>
