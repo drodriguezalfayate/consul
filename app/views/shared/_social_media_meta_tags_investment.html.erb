@@ -1,0 +1,11 @@
+<!-- Twitter -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@<%= setting['twitter_handle'] %>" />
+<meta name="twitter:title" content="<%= @investment.title %>" />
+<meta name="twitter:image" content="<%= image_url '/images/social-media-participatory-budget.png' %>" />
+<!-- Facebook OG -->
+<meta id="ogtitle" property="og:title" content="<%= @investment.title %>"/>
+<meta id="ogurl" property="og:url" content="<%= request.original_url %>"/>
+<meta id="ogimage" property="og:image" content="<%= image_url '/images/social-media-participatory-budget.png' %>"/>
+<meta property="og:site_name" content="<%= setting['org_name'] %>"/>
+<meta id="ogdescription" property="og:description" content="<%= @investment.summary_description %>"/>
