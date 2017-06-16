@@ -55,8 +55,8 @@ es:
           placeholder: Buscar propuestas de inversión...
           title: Buscar
         search_results:
-          one: " que contiene '%{search_term}'"
-          other: " que contienen '%{search_term}'"
+          one: " que contiene '%{search_term}' en todas las zonas"
+          other: " que contienen '%{search_term}' en todas las zonas"
         sidebar:
           my_ballot: Mis votos
           voted_html:
