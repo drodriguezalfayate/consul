@@ -30,6 +30,12 @@ class Management::BaseController < ActionController::Base
       end
     end
 
+    def check_managed_user(alert_msg)
+      if managed_user.document_number.to_s.empty?
+        redirect_to management_document_verifications_path, alert: alert_msg
+      end
+    end
+
     def set_locale
       if params[:locale] && I18n.available_locales.include?(params[:locale].to_sym)
         session[:locale] = params[:locale]

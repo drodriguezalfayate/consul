@@ -5,6 +5,8 @@ class Management::BudgetsController < Management::BaseController
   
   if Rails.application.secrets.census_validate != "disabled"
     before_action :only_verified_users, except: :print_investments
+  elsif
+    before_action :only_managed_users, except: :print_investments
   end
 
   def create_investments
@@ -28,6 +30,10 @@ class Management::BudgetsController < Management::BaseController
 
     def only_verified_users
       check_verified_user t("management.budget_investments.alert.unverified_user")
+    end
+
+    def only_managed_users
+      check_managed_user  t("management.budget_investments.alert.unverified_user")
     end
 
     def current_manager_administrator?

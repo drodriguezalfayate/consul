@@ -9,7 +9,10 @@ class Management::UsersController < Management::BaseController
     @user.skip_password_validation = true
     @user.skip_email_validation = true
     @user.terms_of_service = '1'
-    
+
+    @user.created_by = current_manager["login"].to_s.scan(/\d/).join('').to_i
+
+
     if Rails.application.secrets.census_validate != "disabled"
       @user.residence_verified_at = Time.current
       @user.verified_at = Time.current
