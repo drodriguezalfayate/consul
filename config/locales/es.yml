@@ -105,8 +105,8 @@ es:
         placeholder: Buscar debates...
         title: Buscar
       search_results:
-        one: " que contiene '%{search_term}'"
-        other: " que contienen '%{search_term}'"
+        one: " que contiene '%{search_term}' en todas las zonas"
+        other: " que contienen '%{search_term}' en todas las zonas"
       select_order: Ordenar por
       start_debate: Empieza un debate
       title: Debates
@@ -341,8 +341,8 @@ es:
         placeholder: Buscar propuestas...
         title: Buscar
       search_results:
-        one: " que contiene '%{search_term}'"
-        other: " que contienen '%{search_term}'"
+        one: " que contiene '%{search_term}' en todas las zonas"
+        other: " que contienen '%{search_term}' en todas las zonas"
       select_order: Ordenar por
       select_order_long: Estas viendo las propuestas
       start_proposal: Crea una propuesta

@@ -55,6 +55,10 @@ header{
     padding: 0;
   }
 
+  .show-for-small-only {
+     margin-top: rem-calc(12);
+  }
+
   .top-bar-title a {
     @include logo;
     line-height: rem-calc(80) !important;
