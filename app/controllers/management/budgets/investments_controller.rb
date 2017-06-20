@@ -3,7 +3,10 @@ class Management::Budgets::InvestmentsController < Management::BaseController
   load_resource :budget
   load_resource :investment, through: :budget, class: 'Budget::Investment'
 
-  before_action :only_verified_users, except: :print
+  if Rails.application.secrets.census_validate != "disabled"  
+    before_action :only_verified_users, except: :print
+  end
+
   before_action :load_heading, only: [:index, :show, :print]
 
   def index
@@ -16,6 +19,7 @@ class Management::Budgets::InvestmentsController < Management::BaseController
   end
 
   def create
+
     @investment.terms_of_service = "1"
     @investment.author = managed_user
 

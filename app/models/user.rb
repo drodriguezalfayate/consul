@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :skip_password_validation
   attr_accessor :use_redeemable_code
+  attr_accessor :skip_email_validation
 
   scope :administrators, -> { joins(:administrators) }
   scope :moderators,     -> { joins(:moderator) }
@@ -241,7 +242,11 @@ class User < ActiveRecord::Base
   end
 
   def email_required?
-    !erased?
+    if skip_email_validation
+      false
+    else
+      !erased?
+    end
   end
 
   def locale

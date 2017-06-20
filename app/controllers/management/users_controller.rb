@@ -7,9 +7,17 @@ class Management::UsersController < Management::BaseController
   def create
     @user = User.new(user_params)
     @user.skip_password_validation = true
+    @user.skip_email_validation = true
     @user.terms_of_service = '1'
-    @user.residence_verified_at = Time.current
-    @user.verified_at = Time.current
+    
+    if Rails.application.secrets.census_validate != "disabled"
+      @user.residence_verified_at = Time.current
+      @user.verified_at = Time.current
+    end
+
+    if @user.email.to_s.empty?
+      @user.email = nil
+    end
 
     if @user.save then
       render :show

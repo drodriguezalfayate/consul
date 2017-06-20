@@ -2,8 +2,10 @@ class Management::BudgetsController < Management::BaseController
   include FeatureFlags
   include HasFilters
   feature_flag :budgets
-
-  before_action :only_verified_users, except: :print_investments
+  
+  if Rails.application.secrets.census_validate != "disabled"
+    before_action :only_verified_users, except: :print_investments
+  end
 
   def create_investments
     @budgets = Budget.accepting.order(created_at: :desc).page(params[:page])
