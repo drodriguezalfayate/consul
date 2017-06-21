@@ -75,7 +75,7 @@
       
     </table>
 
-  <% if params[:unfeasible].blank? %>
+  <% if params[:filter]!="unfeasible" %>
     <div class="row margin-top">
       <div class="small-12 column">
         <%= link_to t("budgets.groups.show.unfeasible"), budget_group_path(@budget, @group.id, filter:"unfeasible" ) %>

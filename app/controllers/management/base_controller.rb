@@ -31,7 +31,7 @@ class Management::BaseController < ActionController::Base
     end
 
     def check_managed_user(alert_msg)
-      if managed_user.document_number.to_s.empty?
+      if managed_user.document_number.to_s.empty? || managed_user.username.to_s.empty?
         redirect_to management_document_verifications_path, alert: alert_msg
       end
     end
