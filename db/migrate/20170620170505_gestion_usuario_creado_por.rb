@@ -1,5 +1,5 @@
 class GestionUsuarioCreadoPor < ActiveRecord::Migration
   def change
-    add_column :users, :created_by, :integer, :default => null, :null => true
+    add_column :users, :created_by, :integer, :default => nil, :null => true
   end
 end
