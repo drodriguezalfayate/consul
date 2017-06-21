@@ -15,7 +15,9 @@ class Management::DocumentVerificationsController < Management::BaseController
         render :verified
       elsif @document_verification.user?
         render :new
-      elsif Rails.application.secrets.census_validate == "disabled" || @document_verification.in_census?
+      elsif Rails.application.secrets.census_validate == "disabled"
+        redirect_to new_management_email_verification_path(email_verification: document_verification_params)
+      elsif @document_verification.in_census?
         redirect_to new_management_email_verification_path(email_verification: document_verification_params)
       else
         render :invalid_document
