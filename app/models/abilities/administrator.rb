@@ -49,6 +49,7 @@ module Abilities
       can [:hide, :update, :toggle_selection], Budget::Investment
       can :valuate, Budget::Investment
       can :create, Budget::ValuatorAssignment
+      can :destroy, Budget::Investment, budget: { phase: ["accepting", "reviewing"] }
 
       can [:search, :edit, :update, :create, :index, :destroy], Banner
 
