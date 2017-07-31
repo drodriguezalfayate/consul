@@ -45,7 +45,7 @@ class Admin::BudgetInvestmentsController < Admin::BaseController
 
     def load_investments
       @investments = Budget::Investment.scoped_filter(params, @current_filter)
-                                       .order(cached_votes_up: :desc, created_at: :desc)
+                                       .order(cached_votes_up: :desc, id: :desc)
                                        .page(params[:page])
     end
 
