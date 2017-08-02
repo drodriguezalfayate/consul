@@ -257,7 +257,12 @@ strong, b {
 	background-repeat: no-repeat;
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
+}
 
+.expanded.budget a {
+	 color:white;
+         font-weight: bold;
+	 text-decoration: underline;
 }
 
 .jumbo-budget {

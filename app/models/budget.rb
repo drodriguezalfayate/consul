@@ -130,7 +130,7 @@ class Budget < ActiveRecord::Base
     def sanitize_descriptions
       s = WYSIWYGSanitizer.new
       PHASES.each do |phase|
-        sanitized = s.sanitize(self.send("description_#{phase}"))
+        sanitized = s.sanitize_admin(self.send("description_#{phase}"))
         self.send("description_#{phase}=", sanitized)
       end
     end
