@@ -246,6 +246,7 @@ Devise.setup do |config|
   config.omniauth :twitter, Rails.application.secrets.twitter_key, Rails.application.secrets.twitter_secret
   config.omniauth :facebook, Rails.application.secrets.facebook_key, Rails.application.secrets.facebook_secret, scope: 'email', info_fields: 'email,name,verified'
   config.omniauth :google_oauth2, Rails.application.secrets.google_oauth2_key, Rails.application.secrets.google_oauth2_secret
+  config.omniauth :ldap, :title => 'ldap', :host => Rails.application.secrets.ldap_host, :port => '389', :method => :plain, :base => Rails.application.secrets.ldap_base, :uid => 'mail', :password => Rails.application.secrets.ldap_password, :bind_dn => Rails.application.secrets.ldap_bind_dn
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

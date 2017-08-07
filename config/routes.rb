@@ -12,7 +12,10 @@ end
 
 Rails.application.routes.draw do
 
+
   scope RouteScoper.root do
+
+    resources :ldap, :only => [:new, :create]
 
     devise_for :users, controllers: {
                          registrations: 'users/registrations',

@@ -1217,6 +1217,7 @@ table {
 .button.button-twitter,
 .button.button-facebook,
 .button.button-google,
+.button.button-ldap,
 .button.button-telegram {
   background: white;
   color: $text;
@@ -1286,6 +1287,41 @@ table {
   }
 }
 
+.button.button-ldap {
+  background: #C1DEEA;
+  border-left: 3px solid #006E9C;
+
+  &:before {
+    color: #006E9C;
+    content: "c";
+    font-family: "icons" !important;
+    font-size: rem-calc(24);
+    left: 0;
+    line-height: $line-height*2;
+    padding: 0 rem-calc(20);
+    position: absolute;
+    top: 0;
+  }
+}
+.ssb-ldap {
+  background: #C1DEEA;
+  background-image: none !important;
+  color: white;
+  height: rem-calc(48) !important;
+  position: relative;
+  width: rem-calc(48) !important;
+  
+  &:before{
+    content: "A";
+    font-family: "icons" !important;
+    font-size: rem-calc(24);
+    left: 50%;
+    line-height: $line-height*2;
+    margin-left: rem-calc(-11);
+    position: absolute;
+    top: 0;
+  }
+}
 .ssb-facebook {
   background: #3B5998;
   background-image: none !important;

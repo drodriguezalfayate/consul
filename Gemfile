@@ -105,4 +105,6 @@ group :development do
   gem 'web-console', '3.3.0'
 end
 
+gem 'omniauth-ldap'
+
 # eval_gemfile './Gemfile_custom'
