@@ -19,6 +19,7 @@ class Verification::Residenceva
 	validate :allowed_age
 	validate :document_number_uniqueness
 	validate :postal_code_in_va
+	validate :residence_in_va
 	
 	def initialize( attrs={} )
 		self.date_of_birth = parse_date('date_of_birth', attrs )
@@ -28,7 +29,7 @@ class Verification::Residenceva
 	end
 
 	def save
-		return false unless valid?
+		return false unless valid? && @census_api_response.valid?
 		user.update(
 			document_number:	document_number,
 			document_type:		document_type,
@@ -56,9 +57,38 @@ class Verification::Residenceva
 	end
 
 	def call_census_api
-
-		logger = Logger.new(STDOUT)
 		@census_api_response = CensusvaApi.new.call( document_type, document_number )
+	end
+
+	def residence_in_va
+		return if errors.any?
+		unless residency_valid?
+			errors.add(:residence_in_va, false)
+			store_failed_attempt
+			Lock.increase_tries( user )
+		end
+	end
+
+	def store_failed_attempt
+		FailedCensusCall.create({
+			user: user,
+			document_number: document_number,
+			document_type:	document_type,
+			date_of_birth:	date_of_birth,
+			postal_code:	postal_code
+		})
+	end
+
+	def residency_valid?
+		@census_api_response.valid? && same_date_of_birth? && same_postal_code? && same_document_number?
+	end
+
+	def same_date_of_birth?
+		@census_api_response.date_of_birth == date_of_birth.strftime("%d/%m/%Y")
+	end
+
+	def same_document_number?
+		@census_api_response.document_number == document_number
 	end
 
 	def postal_code_in_va
@@ -66,7 +96,11 @@ class Verification::Residenceva
 	end
 
 	def valid_postal_code?
-		postal_code.start_with?('47') && @census_api_response.postal_code == postal_code
+		postal_code.start_with?('47')
+	end
+
+	def same_postal_code?
+		@census_api_response.postal_code == postal_code
 	end
 
 	def clean_document_number

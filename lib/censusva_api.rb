@@ -33,8 +33,10 @@ class CensusvaApi
 		def date_of_birth
 			@data.at_css("fechaNacimiento").content
 		end
-
-		private
+		
+		def document_number
+			@data.at_css("documento").content
+		end
 	end
 
 	private
@@ -57,7 +59,5 @@ class CensusvaApi
 		Logger.new(STDOUT).info( respuesta )
 
 		respuesta
-		#client.call( :wsdl, "<E> <OPE> <APL>PAD</APL> <TOBJ>HAB</TOBJ> <CMD>CONSULTAESTADO</CMD> <VER>2.0</VER> </OPE> <SEC> <CLI>ACCEDE</CLI> <ORG>0</ORG> <ENT>0</ENT> <USU>ADMIN</USU> <PWD>TJrA+8VFMUV5DWY1HD/XIAF/p08=</PWD> <FECHA>20091005073900</FECHA> <NONCE>577801202602632225</NONCE> <TOKEN>yHqhQhnf3hjV+jDGXU44v7KdoPyJt+TdXnilK0wY01TFKT9qLoe8tgAFrjWQVfo5FOi3gssC6JpLfx5wvK/rvA==</TOKEN> </SEC> <PAR> <codigoTipoDocumento></codigoTipoDocumento> <documento></documento> <nombre></nombre> <particula1></particula1> <apellido1></apellido1> <particula2></particula2> <apellido2></apellido2> <fechaNacimiento></fechaNacimiento> <busquedaExacta>-1</busquedaExacta> </PAR></E>" )
-		#client.call( :example, { "E" => { "OPE" => { "APL" => "PAD", "TOBJ" => "HAB", "CMD" => "CONSULTAESTADO", "VER" => "2.0" }, "SEC" => { "CLI" => "ACCEDE", "ORG" => "0", "ENT" => "0", "USU" => "TEST", "PWD" => "SECRETO", "FECHA" => "20170807084159", "NONCE" => "577801202602632225", "TOKEN" => "ABCDEFG" }, "PAR" => { "codigoTipoDocumento" => 6, "documento" => "123456789A", "busquedaExacta" => -1 } } } )
 	end
 end
