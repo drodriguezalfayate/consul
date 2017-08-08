@@ -51,7 +51,7 @@ class CensusvaApi
 		fecha = Time.now.strftime("%Y%m%d%H%M%S")
 		nonce = 18.times.map{rand(10)}.join
 
-		origen = nonce + fecha + "CI"
+		origen = nonce + fecha + Rails.application.secrets.padron_public_key
 		token = codificar( origen )
 
 		respuesta = RestClient.post( Rails.application.secrets.padron_host, "<E>\n <OPE>\n\t <APL>PAD</APL>\n\t <TOBJ>HAB</TOBJ>\n\t <CMD>CONSULTAESTADO</CMD>\n\t <VER>2.0</VER>\n </OPE>\n <SEC>\n\t <CLI>ACCEDE</CLI>\n\t <ORG>0</ORG>\n\t <ENT>3</ENT>\n\t <USU>CI</USU>\n\t <PWD>" + Rails.application.secrets.padron_password + "</PWD>\n\t <FECHA>" + fecha + "</FECHA>\n\t <NONCE>" + nonce + "</NONCE>\n\t <TOKEN>" + token + "</TOKEN>\n </SEC>\n <PAR>\n\t <codigoTipoDocumento>" + document_type + "</codigoTipoDocumento>\n\t <documento>" + document_number + "</documento>\n\t <nombre></nombre>\n\t <particula1></particula1>\n\t <apellido1></apellido1>\n\t <particula2></particula2>\n\t <apellido2></apellido2>\n\t <fechaNacimiento></fechaNacimiento>\n\t <busquedaExacta>-1</busquedaExacta>\n </PAR>\n</E>",  {:content_type => :xml} )
