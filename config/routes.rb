@@ -132,10 +132,11 @@ Rails.application.routes.draw do
 
     resources :proposal_notifications, only: [:new, :create, :show]
 
-    resource :verification, controller: "verification", only: [:show]
+    resource :verification, controller: "verificationva", only: [:show]
 
     scope module: :verification do
-  #    resource :residence, controller: "residence", only: [:new, :create]
+      resource :residenceva, controller: "residenceva", only: [:new, :create]
+     #resource :residence, controller: "residence", only: [:new, :create]
       resource :sms, controller: "sms", only: [:new, :create, :edit, :update]
       resource :verified_user, controller: "verified_user", only: [:show]
       resource :email, controller: "email", only: [:new, :show, :create]
