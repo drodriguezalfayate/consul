@@ -1,0 +1,14 @@
+<div class='small-9 medium-7 small-centered column'>
+<div class='padding auth-form'>
+	<h2>Identifícate para votar</h2>
+	<p>Introduce tu DNI y el código incluído en el SMS o en la carta que hemos enviado a tu domicilio. Si no dispones de DNI introduce tu NIE o Pasaporte. En todos los casos recuerda introducir el documento incluyendo la letra o letras, sin incluír puntos, espacios o guiones.</p>
+	<%= form_tag( codigos_path, method: :post) do %>
+		<%= label_tag("clave", "DNI:") %>
+		<%= text_field_tag("clave") %>
+		<%= label_tag("valor", "Código:") %>
+		<%= password_field_tag("valor") %>
+		<%= submit_tag nil, :class => 'button expanded' %>
+	<% end %>
+	<p>Si no dispones de código, puedes <%= link_to 'acceder', new_user_session_path %> con tu cuenta o si no dispones de una, registrarla <%= link_to 'aqui', new_user_registration_path %>, pero recuerda que para poder votar tendrás que verificar dicha cuenta.</p>
+</div>
+</div>

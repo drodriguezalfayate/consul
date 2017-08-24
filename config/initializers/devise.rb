@@ -1,3 +1,4 @@
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -247,7 +248,7 @@ Devise.setup do |config|
   config.omniauth :facebook, Rails.application.secrets.facebook_key, Rails.application.secrets.facebook_secret, scope: 'email', info_fields: 'email,name,verified'
   config.omniauth :google_oauth2, Rails.application.secrets.google_oauth2_key, Rails.application.secrets.google_oauth2_secret
   config.omniauth :ldap, :title => 'ldap', :host => Rails.application.secrets.ldap_host, :port => '389', :method => :plain, :base => Rails.application.secrets.ldap_base, :uid => Rails.application.secrets.ldap_attribute, :password => Rails.application.secrets.ldap_password, :bind_dn => Rails.application.secrets.ldap_bind_dn, :url => Rails.application.secrets.ldap_url
-
+  config.omniauth :codigo, :url_api => Rails.application.secrets.codigo_url_api
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

@@ -30,7 +30,6 @@ module OmniAuth
       def request_phase
 
         OmniAuth::LDAP::Adaptor.validate @options
-        
 	redirect options[:url]
 
       end

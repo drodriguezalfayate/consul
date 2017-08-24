@@ -143,6 +143,7 @@ Rails.application.routes.draw do
       resource :letter, controller: "letter", only: [:new, :create, :show, :edit, :update]
     end
 
+
     namespace :admin do
       root to: "dashboard#index"
       resources :organizations, only: :index do
@@ -387,6 +388,11 @@ Rails.application.routes.draw do
     end
 
     mount Tolk::Engine => '/translate', :as => 'tolk'
+
+    # API CODIGOS VA
+    post 'codigos/api', to: 'codigos#api'
+    post 'codigos', to: 'codigos#create'
+    resources :codigos
 
     # more info pages
     get 'more-information',                     to: 'pages#show', id: 'more_info/index',                as: 'more_info'

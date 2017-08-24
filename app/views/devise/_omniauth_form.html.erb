@@ -31,12 +31,7 @@
                       class: "button-google button expanded" %>
         </div>
       <% end %>
-      
-	<% if feature? :ldap_login %>
-	      <div class="small-12 medium-6 large-6 column end">
-	        <%= link_to 'LDAP', user_omniauth_authorize_path(:ldap), title: 'Iniciar sesion con LDAP', class: "button-ldap button expanded" %>
-	      </div>
-	<% end %>
+
       <div class="small-12 column auth-divider">
         <span><%= t("omniauth.or_fill") %></span>
       </div>

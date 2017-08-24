@@ -2,7 +2,6 @@
 	<%- if controller_name != 'sessions' %>
 	  <%= link_to t("devise_views.shared.links.login"), new_session_path(resource_name) %><br>
 	<% end -%>
-
   <%#- if devise_mapping.registerable? &&
         controller_name != 'registrations' ||
         controller_path != 'users/registrations' %>
@@ -30,5 +29,9 @@
 	    <%= link_to t("devise_views.shared.links.signin_with_provider", provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %><br>
 	  <% end -%>
 	<% end -%>
+
+  <% if feature? :ldap_login %>
+    <%= link_to '¿Tienes una cuenta corporativa?', user_omniauth_authorize_path(:ldap) %>
+  <% end %>
 
 </div>

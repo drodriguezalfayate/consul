@@ -105,7 +105,10 @@ group :development do
   gem 'web-console', '3.3.0'
 end
 
-gem 'omniauth-ldap'
+gem 'omniauth-ldap', :path => './omniauth-ldap'
+gem 'omniauth-codigo', :path => './omniauth-codigo'
+
 gem 'rest-client'
+gem 'httparty'
 
 # eval_gemfile './Gemfile_custom'
