@@ -274,7 +274,7 @@ es:
     or_fill: "O rellena el siguiente formulario:"
     finish_signup:
       title: "Detalles adicionales de tu cuenta"
-      username_warning: "Debido a que hemos cambiado la forma en la que nos conectamos con redes sociales y es posible que tu nombre de usuario aparezca como 'ya en uso', incluso si antes podías acceder con él. Si es tu caso, por favor elige un nombre de usuario distinto."
+      username_warning: "No es posible iniciar sesión con tu cuenta. Existe otra cuenta en el sistema verificada que impide el acceso con los datos que has introducido. Por favor utiliza la cuenta inicial."
   proposals:
     create:
       form:

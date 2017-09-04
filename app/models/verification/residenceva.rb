@@ -42,7 +42,7 @@ class Verification::Residenceva
 	private
 
 	def document_number_uniqueness
-		if ( (document_type.to_s == "1" || document_type.to_s == 3) )
+		if ( (document_type.to_s == "1" || document_type.to_s == "3") )
 			errors.add(:document_number, "Numero de documento inválido") if document_number.length != 9
 		elsif (( document_type.to_s == "1" || document_type.to_s == "3" ) && document_number.length >= 8 )
 			errors.add(:document_number, I18n.t('errors.messages.taken')) if User.where("document_number like '" + document_number.to_s.first(8) + "%'" ).where("id != ?", user.id ).any?
@@ -80,11 +80,11 @@ class Verification::Residenceva
 	end
 
 	def residency_valid?
-		@census_api_response.valid? && same_date_of_birth? && same_postal_code? && same_document_number?
+		@census_api_response.valid? && same_date_of_birth? && same_postal_code?
 	end
 
 	def same_date_of_birth?
-		@census_api_response.date_of_birth == date_of_birth.strftime("%d/%m/%Y")
+		@census_api_response.date_of_birth == date_of_birth.strftime("%Y%m%d%H%M%S")
 	end
 
 	def same_document_number?
