@@ -29,9 +29,14 @@
               <%= t("budgets.investments.index.unfeasible_text",
               definitions: link_to(t("budgets.investments.index.unfeasible_text_definitions"), more_info_path )).html_safe %>
           </div>
+        <% elsif @current_filter == "unselected" %>
+	          <%= content_tag(:h2, t("budgets.investments.index.by_heading", heading: @heading.name)) if @heading.present? %>
+		 <div class="callout primary margin">
+			En este listado se publican las propuestas que no han alcanzado la puntuación suficiente en la fase de priorización de propuestas
+		</div>
         <% else %>
-          <%= content_tag(:h2, t("budgets.investments.index.by_heading", heading: @heading.name)) if @heading.present? %>
-        <% end %>
+	  <%= content_tag(:h2, t("budgets.investments.index.by_heading", heading: @heading.name)) if @heading.present? %>
+	<% end %>
 
         <% if params[:search].present? %>
           <h2>

@@ -362,3 +362,21 @@ body.admin .top-bar {
   display: list-item;
   margin-left: 2rem;
 }
+
+///////////////////////
+// VOTACIONES        //
+///////////////////////
+
+
+.progress-bar-nav {
+
+  @include breakpoint(medium) {
+    background-color: transparent;
+
+
+    &.is-fixed {
+	background-color: $budget;
+    }
+  }
+}
+

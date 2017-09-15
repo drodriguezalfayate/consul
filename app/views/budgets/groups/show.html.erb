@@ -75,14 +75,14 @@
       
     </table>
 
-  <% if params[:unfeasible].blank? %>
-    <div class="row margin-top">
+  <%# if params[:unfeasible].blank? %>
+    <!--<div class="row margin-top">
       <div class="small-12 column">
-        <%= link_to t("budgets.groups.show.unfeasible"), budget_group_path(@budget, @group.id, filter:"unfeasible" ) %>
+        <%#= link_to t("budgets.groups.show.unfeasible"), budget_group_path(@budget, @group.id, filter:"unfeasible" ) %>
       </div>
-    </div>
+    </div>-->
 
-  <% end %>
+  <%# end %>
 
   </div>
 
@@ -98,8 +98,7 @@
     <div class="row">
       <div class="small-12 column">
         <small>
-          <%= link_to t("budgets.groups.show.unfeasible"),
-                      budget_path(@budget, filter: "unfeasible") %>
+	<%= link_to t("budgets.groups.show.unfeasible"), budget_group_path(@budget, @group.id, filter:"unfeasible" ) %>
         </small>
       </div>
     </div>
@@ -109,9 +108,8 @@
     <div class="row">
       <div class="small-12 column">
         <small>
-          <%= link_to t("budgets.groups.show.unselected"),
-                      budget_path(@budget, filter: "unselected") %>
-        </small>
+	<%= link_to t("budgets.groups.show.unselected"), budget_group_path(@budget, @group.id, filter:"unselected" ) %>
+	</small>
       </div>
     </div>
   <% end %>
