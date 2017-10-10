@@ -1,7 +1,7 @@
 <div class='small-9 medium-7 small-centered column'>
 <div class='padding auth-form'>
 	<h2>Identifícate para votar</h2>
-	<p>Introduce tu DNI y el código incluído en el SMS o en la carta que hemos enviado a tu domicilio. Si no dispones de DNI introduce tu NIE o Pasaporte. En todos los casos recuerda introducir el documento incluyendo la letra o letras, sin incluír puntos, espacios o guiones.</p>
+	<p>Introduce tu DNI y el código incluído en el SMS o en la carta que hemos enviado a tu domicilio. Si no dispones de DNI introduce tu NIE o Pasaporte. En todos los casos recuerda introducir el documento incluyendo la letra o letras en mayúsculas, sin incluír puntos, espacios o guiones.</p>
 	<%= form_tag( codigos_path, method: :post) do %>
 		<%= label_tag("clave", "DNI:") %>
 		<%= text_field_tag("clave") %>
