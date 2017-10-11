@@ -24,7 +24,7 @@
                 destroy_user_session_path, rel: "nofollow", method: :delete %>
   </li>
 <% else %>
-  <li>
+  <li id="entrarVA">
     <%= link_to t("devise_views.menu.login_items.login"),
                 user_omniauth_authorize_path(:codigo), rel: "nofollow", class: "button" %>
   </li>

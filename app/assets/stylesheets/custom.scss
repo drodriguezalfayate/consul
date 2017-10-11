@@ -8,6 +8,22 @@
 // 01. Global styles
 // -----------------
 
+#entrarVA a {
+
+font-size: 1.3rem;
+padding: 0.9rem 3rem;
+}
+
+
+#entrarVA a.button {
+
+background: $brand;
+color: $brand2;
+text-align: center;
+font-weight: bold;
+
+}
+
 
 .categories a,
 .geozone a {
@@ -85,7 +101,7 @@ header{
         padding-left: 0;
 
         @include breakpoint(medium) {
-          font-size: $small-font-size;
+	  font-size: $small-font-size;
           padding: rem-calc(11) rem-calc(15);
         }
 
