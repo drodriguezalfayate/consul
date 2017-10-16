@@ -26,7 +26,7 @@
 
     <tbody>
       <% amount_available = heading.price %>
-      <% @heading.investments.each do |investment| %>
+      <% @investments.each do |investment| %>
         <% if investment.winner? %>
           <tr id="<%= dom_id(investment) %>"
               class="spending_proposal success">
