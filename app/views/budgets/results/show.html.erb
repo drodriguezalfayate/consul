@@ -1,6 +1,6 @@
 <% provide :title, t("budgets.results.page_title", budget: @budget.name) %>
 <% content_for :canonical do %>
-  <%= render "shared/canonical", href: budget_results_url(@budget, heading_id: @result.heading) %>
+  <%= render "shared/canonical", href: budget_results_url(@budget) %>
 <% end %>
 
 <div class="expanded budget no-margin-top">
@@ -20,19 +20,20 @@
   <div class="small-12 medium-3 column">
     <ul class="menu vertical no-margin-top no-padding-top">
       <li>
-        <strong>
+        <h3>
           <%= t("budgets.results.geozone_selection_title") %>
-        </strong>
+        </h3>
       </li>
 
-      <% @budget.headings.each do |heading| %>
+      <% @budget.headings.order_by_id.each do |heading| %>
         <li>
           <%= link_to heading.name,
-                      budget_results_path(@budget, heading_id: heading.id) %>
+                      budget_results_path(@budget, heading_id: heading.to_param),
+		      class: heading.to_param == @heading.to_param ? 'active' : '' %>
         </li>
       <% end %>
     </ul>
   </div>
 
-  <%= render 'results_table', heading: @result.heading %>
+  <%= render 'results_table', heading: @heading %>
 </div>

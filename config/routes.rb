@@ -185,6 +185,11 @@ Rails.application.routes.draw do
       end
 
       resources :budgets do
+
+	member do
+        	put :calculate_winners
+      	end
+
         resources :budget_groups do
           resources :budget_headings do
           end

@@ -396,3 +396,17 @@ body.admin .top-bar {
   }
 }
 
+.menu.vertical {
+  li {
+
+    h3 {
+	color: black;
+    }
+
+    a.active {
+      color: $brand;
+      font-weight: bold;
+    }
+  }
+}
+
