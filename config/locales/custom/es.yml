@@ -6,7 +6,7 @@ es:
       form: "Revisa los datos introducidos, todos los campos son obligatorios."
     comprobation:
       access_code: "Tu código de acceso es: "
-      access_with_code: Si lo deseas, puedes identificarte con éste código y con tu número de documento para votar en el <a href="<%= new_codigo_path %>">siguiente enlace</a>
+      access_with_code: Si lo deseas, puedes identificarte con éste código y con tu número de documento para votar en el <a href="%{link}">siguiente enlace</a>
   recaptcha:
     errors:
       verification_failed: "Ha fallado la validación del reCAPTCHA. Inténtalo de nuevo."

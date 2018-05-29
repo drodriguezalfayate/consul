@@ -6,4 +6,4 @@ en:
       form: "Review the data entered, all fields are required."
     comprobation:
       access_code: "Your access code is: "
-      access_with_code: If you wish, you can identify yourself with this code and with your document number to vote in the <a href="<%= new_codigo_path %>"> following link </a>
+      access_with_code: If you wish, you can identify yourself with this code and with your document number to vote in the <a href="%{link}"> following link </a>
