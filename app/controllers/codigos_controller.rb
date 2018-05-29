@@ -33,9 +33,12 @@ class CodigosController < ApplicationController
     document_number = residence_params[:document_number].gsub(/[^a-z0-9]+/i, "").upcase
     postal_code = residence_params[:postal_code]
     date_of_birth = Date.new(residence_params['date_of_birth(1i)'].to_i, residence_params['date_of_birth(2i)'].to_i, residence_params['date_of_birth(3i)'].to_i) rescue nil
-    @error = nil
+    terms_of_service = residence_params[:terms_of_service]
 
-    if verify_recaptcha && document_type.present? && document_number.present? && postal_code.present? && date_of_birth.present?
+    @error = nil
+    recaptcha_flag = verify_recaptcha
+
+    if recaptcha_flag && document_type.present? && document_number.present? && postal_code.present? && date_of_birth.present? && terms_of_service == "1"
       @census_api_response = CensusvaApi.new.call(residence_params[:document_type], document_number)
 
       if postal_code.start_with?('47') && @census_api_response.valid? && @census_api_response.postal_code == postal_code && @census_api_response.date_of_birth == date_of_birth.strftime("%Y%m%d%H%M%S")
@@ -48,7 +51,11 @@ class CodigosController < ApplicationController
     end
 
     if @error.present?
-      redirect_to codigos_solicitar_path(params: residence_params), flash: { error: @error }
+      if recaptcha_flag
+        redirect_to codigos_solicitar_path(params: residence_params), flash: { error: @error }
+      else
+        redirect_to codigos_solicitar_path(params: residence_params)
+      end
     end
   end
 
