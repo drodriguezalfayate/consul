@@ -1,0 +1,14 @@
+es:
+  admin:
+    consultants:
+      consultant:
+        add: "Añadir"
+        delete: Eliminar
+      index:
+        title: "Consultores"
+      search:
+        email_placeholder: "Email"
+        search: "Buscar"
+        user_not_found: "Usuario no encontrado"
+    menu:
+      consultants: Consultores

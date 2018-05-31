@@ -1,0 +1,14 @@
+en:
+  admin:
+    consultants:
+      consultant:
+        add: "Add"
+        delete: Delete
+      index:
+        title: "Consultants"
+      search:
+        email_placeholder: "Email"
+        search: "Search"
+        user_not_found: "User not found"
+    menu:
+      consultants: Consultants
