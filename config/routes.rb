@@ -232,6 +232,10 @@ Rails.application.routes.draw do
         get :search, on: :collection
       end
 
+      resources :consultants, only: [:index, :create, :destroy] do
+        get :search, on: :collection
+      end
+
       resources :administrators, only: [:index, :create, :destroy] do
         get :search, on: :collection
       end
