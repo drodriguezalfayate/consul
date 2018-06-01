@@ -409,8 +409,6 @@ Rails.application.routes.draw do
     # API CODIGOS VA
     post 'codigos/api', to: 'codigos#api'
     post 'codigos', to: 'codigos#create'
-    get 'codigos/solicitar', to: 'codigos#solicitar'
-    post 'codigos/comprobar', to: 'codigos#comprobar_datos'
 
     resources :codigos
 
