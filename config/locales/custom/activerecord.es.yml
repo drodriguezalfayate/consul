@@ -1,0 +1,6 @@
+es:
+  activerecord:
+    models:
+      consultant:
+        one: "Consultor"
+        other: "Consultores"

@@ -232,6 +232,10 @@ Rails.application.routes.draw do
         get :search, on: :collection
       end
 
+      resources :consultants, only: [:index, :create, :destroy] do
+        get :search, on: :collection
+      end
+
       resources :administrators, only: [:index, :create, :destroy] do
         get :search, on: :collection
       end
@@ -388,6 +392,14 @@ Rails.application.routes.draw do
       root to: "dashboard#index"
     end
 
+    namespace :consultation do
+      root to: "dashboard#index"
+
+      resources :codes, only: [:index, :check] do 
+        post :check, on: :collection
+      end
+    end
+
     if Rails.env.development?
       mount LetterOpenerWeb::Engine, at: "/letter_opener"
     end
@@ -397,8 +409,6 @@ Rails.application.routes.draw do
     # API CODIGOS VA
     post 'codigos/api', to: 'codigos#api'
     post 'codigos', to: 'codigos#create'
-    get 'codigos/solicitar', to: 'codigos#solicitar'
-    post 'codigos/comprobar', to: 'codigos#comprobar_datos'
 
     resources :codigos
 

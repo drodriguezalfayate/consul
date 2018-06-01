@@ -9,6 +9,6 @@
 		<%= password_field_tag("valor") %>
 		<%= submit_tag nil, :class => 'button expanded' %>
 	<% end %>
-	<p>Si no dispones de código, puedes obtener el tuyo <%= link_to "aquí", codigos_solicitar_path %>. También puedes <%= link_to 'acceder', new_user_session_path %> con tu cuenta o si no dispones de una, registrarla <%= link_to 'aqui', new_user_registration_path %>, pero recuerda que para poder votar tendrás que verificar dicha cuenta.</p>
+	<p>Si no dispones de código, puedes <%= link_to 'acceder', new_user_session_path %> con tu cuenta o si no dispones de una, registrarla <%= link_to 'aqui', new_user_registration_path %>, pero recuerda que para poder votar tendrás que verificar dicha cuenta.</p>
 </div>
 </div>

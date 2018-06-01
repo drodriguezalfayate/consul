@@ -4,6 +4,20 @@ en:
     errors:
       census: "The census has not been able to verify your data, check the entered data or contact the city council."
       form: "Review the data entered, all fields are required."
+      not_found: "The user has been found but the access code could not be obtained. Contact technical service to solve it."
     comprobation:
-      access_code: "Your access code is: "
-      access_with_code: If you wish, you can identify yourself with this code and with your document number to vote in the <a href="%{link}"> following link </a>
+      access_code: "The user's access code is: "
+      access_with_code: The user can identify himself with his code and document number to vote in the <a href="%{link}">following link</a>
+  layouts:
+    header:
+      consultation: "Consultations"
+  consultation:
+    codes:
+      form:
+        title: "Fill in the form to obtain the user's access code"
+        accept_terms_text: "the user accepts %{terms_url} of the Census"
+    dashboard:
+      index:
+        title: "Consultations"
+    menu:
+      codes: "Access codes"

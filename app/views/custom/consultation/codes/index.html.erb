@@ -1,14 +1,12 @@
 <div class="verification account row">
-  <%track_event(category: "verification", action: "start_census" )%>
   <div class="small-12 column" id="codigos-section">
 
-    <h2>Rellena el formulario para obtener el código de acceso</h2>
+    <h2><%= t("consultation.codes.form.title") %></h2>
 
-    <%= form_for @residence, url: codigos_comprobar_path(@residence), as: "residence", id: "js-form-codigos" do |f| %>
-      <%#= render "errors" %>
+    <%= form_for @residence, url: check_consultation_codes_path(@residence), as: "residence", id: "js-form-codigos" do |f| %>
 
       <div class="row">
-        <div class="small-12 medium-8">
+        <div class="small-12 medium-12">
           <div class="small-12 medium-3 column">
           <%= f.label t("verification.residence.new.document_type_label") %>
           <%= f.select :document_type, document_types, prompt: "", label: false, selected: params[:document_type] %>
@@ -44,7 +42,6 @@
 
       <div class="small-12 medium-5 clear">
         <%= f.label t("verification.residence.new.postal_code") %>
-        <p class="note"><%= t("verification.residence.new.postal_code_note") %></p>
         <div class="medium-6">
           <%= f.text_field :postal_code, label: false, value: params[:postal_code] %>
         </div>
@@ -54,7 +51,7 @@
         <%= f.label :terms_of_service do %>
           <%= f.check_box :terms_of_service, title: t('verification.residence.new.accept_terms_text_title'), label: false, checked: ( (params[:terms_of_service] == "1") ? true : false ) %>
           <span class="checkbox">
-            <%= t("verification.residence.new.accept_terms_text",
+            <%= t("consultation.codes.form.accept_terms_text",
                 terms_url: link_to(t("verification.residence.new.terms"), root_url + '/' + "census_terms",
                 title: t('shared.target_blank_html'),
                 target: "_blank"),
@@ -69,8 +66,6 @@
         <% end %>
       </div>
       
-      <br><%= recaptcha_tags %><br>
-
       <div class="small-12 medium-3 clear">
         <%= f.submit "Enviar", class: "button success expanded" %>
       </div>

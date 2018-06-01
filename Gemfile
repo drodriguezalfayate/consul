@@ -111,6 +111,4 @@ gem 'omniauth-codigo', :path => './omniauth-codigo'
 gem 'rest-client'
 gem 'httparty'
 
-gem "recaptcha", require: "recaptcha/rails"
-
 # eval_gemfile './Gemfile_custom'
