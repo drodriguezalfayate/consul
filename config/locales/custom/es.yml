@@ -4,9 +4,20 @@ es:
     errors:
       census: "El padrón no ha podido verificar tus datos, revisa los datos introducidos o contacta con el ayuntamiento."
       form: "Revisa los datos introducidos, todos los campos son obligatorios."
+      not_found: "Se ha encontrado al usuario en el padrón pero no se ha podido obtener el código de acceso. Contacta con el servicio técnico del ayuntamiento para solucionarlo."
     comprobation:
-      access_code: "Tu código de acceso es: "
-      access_with_code: Si lo deseas, puedes identificarte con éste código y con tu número de documento para votar en el <a href="%{link}">siguiente enlace</a>
+      access_code: "El código de acceso del usuario es: "
+      access_with_code: El usuario puede identificarse con su código y número de documento para votar en el <a href="%{link}">siguiente enlace</a>
   layouts:
     header:
       consultation: "Consultas"
+  consultation:
+    codes:
+      form:
+        title: "Rellena el formulario para obtener el código de acceso del usuario"
+        accept_terms_text: "El usuario acepta %{terms_url} al Padrón"
+    dashboard:
+      index:
+        title: "Consultas"
+    menu:
+      codes: "Códigos de acceso"

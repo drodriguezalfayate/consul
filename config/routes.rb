@@ -392,6 +392,14 @@ Rails.application.routes.draw do
       root to: "dashboard#index"
     end
 
+    namespace :consultation do
+      root to: "dashboard#index"
+
+      resources :codes, only: [:index, :check] do 
+        post :check, on: :collection
+      end
+    end
+
     if Rails.env.development?
       mount LetterOpenerWeb::Engine, at: "/letter_opener"
     end
