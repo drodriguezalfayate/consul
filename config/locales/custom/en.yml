@@ -7,3 +7,6 @@ en:
     comprobation:
       access_code: "Your access code is: "
       access_with_code: If you wish, you can identify yourself with this code and with your document number to vote in the <a href="%{link}"> following link </a>
+  layouts:
+    header:
+      consultation: "Consultas"
