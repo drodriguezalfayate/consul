@@ -10,7 +10,7 @@ class Admin::ConsultantsController < Admin::BaseController
 
     respond_to do |format|
       if @user
-        @consultant = Manager.find_or_initialize_by(user: @user)
+        @consultant = Consultant.find_or_initialize_by(user: @user)
         format.js
       else
         format.js { render "user_not_found" }
