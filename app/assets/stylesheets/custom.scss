@@ -240,6 +240,16 @@ header{
   margin-top: 0;
 }
 
+.custom-yellow-button {
+  color: black !important; 
+  background: #FFDB0A !important;
+  border: 1px solid #FFDB0A !important;
+  &:hover {
+    background: #f9e886 !important;
+    border-color: black !important;
+  }
+}
+
 // 05. Auth pages
 // --------------
 

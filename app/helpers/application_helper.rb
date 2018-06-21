@@ -48,6 +48,14 @@ module ApplicationHelper
     end
   end
 
+  # Añadido método custom para cambiar el botón de vuelta atrás sin tocar el original (el cual se usa en más sitios)
+  def custom_back_link_to(destination_path)
+    destination = destination_path || :back
+    link_to destination, class: "button hollow custom-yellow-button" do
+      "<span class='icon-angle-left' style='color: black;'></span>".html_safe + t("shared.custom-back")
+    end
+  end
+
   def image_path_for(filename)
     SiteCustomization::Image.image_path_for(filename) || filename
   end
