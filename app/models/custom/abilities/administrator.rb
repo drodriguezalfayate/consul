@@ -36,8 +36,12 @@ module Abilities
 
       can [:search, :create, :index, :destroy], ::Administrator
       can [:search, :create, :index, :destroy], ::Moderator
-      can [:search, :create, :index, :summary], ::Valuator
+
+      # Añadido método destroy
+      can [:search, :create, :index, :destroy, :summary], ::Valuator
       can [:search, :create, :index, :destroy], ::Manager
+      
+      # Añadidos permisos para el nuevo tipo de usuario 'consultor'
       can [:search, :create, :index, :destroy], ::Consultant
 
       can :manage, Annotation

@@ -263,6 +263,7 @@ es:
         description_placeholder: "Descripción (opcional)"
         user_found: Usuario encontrado
         add: Añadir como evaluador
+        delete: Eliminar
       search:
         email_placeholder: Buscar usuario por email
         search: Buscar
