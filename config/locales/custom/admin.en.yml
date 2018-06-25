@@ -12,3 +12,7 @@ en:
         user_not_found: "User not found"
     menu:
       consultants: Consultants
+    stats:
+      show:
+        summary:
+          budget_votes: "Votes of the current participatory budget"
