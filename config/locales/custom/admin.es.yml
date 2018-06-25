@@ -15,4 +15,5 @@ es:
     stats:
       show:
         summary:
-          budget_votes: "Votos del presupuesto participativo actual"
+          budget_votes: "PROYECTOS VOTADOS DEL PRESUPUESTO ACTUAL"
+          budget_voters: "VOTOS DEL PRESUPUESTO ACTUAL"

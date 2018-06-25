@@ -27,9 +27,12 @@ class Admin::StatsController < Admin::BaseController
     @budgets = budgets_ids.size
     @investments = Budget::Investment.where(budget_id: budgets_ids).count
     
-    # Total de votos del último presupuesto participativo
+    # Número de votos del último presupuesto participativo
     last_budget = Budget.order(:created_at).last
     @last_budget_votes = last_budget.investments.map(&:ballot_lines_count).sum
+  
+    # Número de votantes del último presupuesto participativo
+    @last_budget_voters = Budget::Ballot::Line.where(budget: last_budget).to_a.uniq { |line| line.ballot.user_id  }.count
   end
 
 end

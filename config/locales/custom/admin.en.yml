@@ -15,4 +15,5 @@ en:
     stats:
       show:
         summary:
-          budget_votes: "Votes of the current participatory budget"
+          budget_votes: "VOTED PROJECTS IN CURRENT BUDGET"
+          budget_voters: "VOTES IN CURRENT BUDGET"
