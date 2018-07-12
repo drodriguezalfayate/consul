@@ -67,17 +67,18 @@
     </tbody>
   </table>
 
-  <h4>Gestión del saldo restante tras el proceso de votación</h4>
+  <% if @budget.id == 1 %>
+    <h4>Gestión del saldo restante tras el proceso de votación</h4>
 
-  <p>Finalizado el proceso de votación ha quedado un saldo restante en cada zona que no ha podido asignarse a  propuestas ya que el valor económico de las mismas excedía la cuantía disponible.</p>
-  <p>Reunido el grupo motor de este proceso, se ha decidido destinar ese saldo restante  a una propuesta de un barrio que no tuviera ninguna otra propuesta asignada.</p>
+    <p>Finalizado el proceso de votación ha quedado un saldo restante en cada zona que no ha podido asignarse a  propuestas ya que el valor económico de las mismas excedía la cuantía disponible.</p>
+    <p>Reunido el grupo motor de este proceso, se ha decidido destinar ese saldo restante  a una propuesta de un barrio que no tuviera ninguna otra propuesta asignada.</p>
 
-  <p>Se incorporan las propuestas de: 
-	<ul>
-	<li>Zona Pisuerga 1: Mejora de las instalaciones deportivas  Barrio La Overuela, valorada en 100.000 €</li>
+    <p>Se incorporan las propuestas de: 
+  	<ul>
+  	<li>Zona Pisuerga 1: Mejora de las instalaciones deportivas  Barrio La Overuela, valorada en 100.000 €</li>
 
-	<li>Zona Esgueva 1: Mejoras en el Parque Ribera de Castilla por un importe de 49.450 € </li>
-	</ul>
-  </p>
-
+  	<li>Zona Esgueva 1: Mejoras en el Parque Ribera de Castilla por un importe de 49.450 € </li>
+  	</ul>
+    </p>
+  <% end %>
 </div>
