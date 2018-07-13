@@ -12,9 +12,6 @@
           <%= t("budgets.results.spending_proposal") %>
         </th>
         <th scope="col" class="text-center">
-          <%= t("budgets.results.ballot_lines_count") %>
-        </th>
-        <th scope="col" class="text-center">
           <%= t("budgets.results.price") %>
         </th>
         <th scope="col" class="text-right">
@@ -50,9 +47,6 @@
               <% end %>
               <%= link_to investment.title,
                           budget_investment_path(@budget, investment) %>
-            </td>
-            <td class="text-center">
-              <%= investment.ballot_lines_count %>
             </td>
             <td class="text-center">
               <%= format_price investment.price %>
