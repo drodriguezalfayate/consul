@@ -24,4 +24,4 @@ es:
   officing:
     locked_users:
       index:
-        submit: "Bloquear voto"
+        submit: "Validar documento"
