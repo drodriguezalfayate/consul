@@ -380,6 +380,12 @@ Rails.application.routes.draw do
     end
 
     namespace :officing do
+      namespace :budgets do
+        resources :locked_users do
+          post :preview, on: :collection
+        end
+      end
+      
       resources :polls, only: [:index] do
         get :final, on: :collection
 
