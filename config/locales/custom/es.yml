@@ -21,3 +21,7 @@ es:
         title: "Consultas"
     menu:
       codes: "Códigos de acceso"
+  officing:
+    locked_users:
+      index:
+        submit: "Bloquear voto"

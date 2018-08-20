@@ -11,6 +11,7 @@ es:
       voters: "Validar documento y votar"
       recounts: "Recuento diario"
       final_recounts: "Recuento final y escrutinio"
+      locked_users: "Bloquear voto de usuarios"
     polls:
       index:
         title: "Listado de votaciones"
