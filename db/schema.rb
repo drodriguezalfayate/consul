@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180809084718) do
+ActiveRecord::Schema.define(version: 20180822095855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -649,6 +649,14 @@ ActiveRecord::Schema.define(version: 20180809084718) do
 
   add_index "settings", ["key"], name: "index_settings_on_key", using: :btree
 
+  create_table "signature_sheet_officers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "signature_sheet_officers", ["user_id"], name: "index_signature_sheet_officers_on_user_id", using: :btree
+
   create_table "signature_sheets", force: :cascade do |t|
     t.integer  "signable_id"
     t.string   "signable_type"
@@ -969,6 +977,7 @@ ActiveRecord::Schema.define(version: 20180809084718) do
   add_foreign_key "poll_voters", "polls"
   add_foreign_key "poll_white_results", "poll_booth_assignments", column: "booth_assignment_id"
   add_foreign_key "poll_white_results", "poll_officer_assignments", column: "officer_assignment_id"
+  add_foreign_key "signature_sheet_officers", "users"
   add_foreign_key "users", "geozones"
   add_foreign_key "valuators", "users"
 end
