@@ -1,6 +1,6 @@
-<h2><%= t("officing.locked_users.preview.title") %></h2>
+<h2><%= t("restriction.locked_users.preview.title") %></h2>
 
-<%= form_for([:officing, @locked_user], url: officing_budgets_locked_users_path) do |f| %>
+<%= form_for([:restriction, @locked_user], url: restriction_locked_users_path) do |f| %>
   <%= render 'shared/errors',
               resource: @locked_user %>
 
@@ -11,32 +11,32 @@
   <h3 class="inline-block"><%= @locked_user.budget.name %></h2>
 
   <h3 id="document_count" class="block">
-    <%= t("officing.locked_users.document") %>
+    <%= t("restriction.locked_users.document") %>
     <%= humanize_document_type(@locked_user.document_type) %> / <%= @locked_user.document_number %>
   </h3>
 
   <% if @already_locked %>
   <div data-alert class="callout success">
-    <%= t("officing.locked_users.user_already_locked", date: @locked_time.strftime('%d-%m-%Y a las %H:%M')) %>
+    <%= t("restriction.locked_users.user_already_locked", date: @locked_time.strftime('%d-%m-%Y a las %H:%M')) %>
   </div>
   <% else %>
 
     <% if !@in_census %>
     <div data-alert class="callout alert">
-      <%= t("officing.locked_users.user_not_in_census") %>
+      <%= t("restriction.locked_users.user_not_in_census") %>
     </div>
     <% end %>
     <% if @has_voted %>
     <div data-alert class="callout alert">
-      <%= t("officing.locked_users.user_already_voted") %>
+      <%= t("restriction.locked_users.user_already_voted") %>
     </div>
     <% end %>
     <% if @in_census && !@has_voted %>
     <div data-alert class="callout success">
-      <%= t("officing.locked_users.user_allowed_to_be_locked") %>
+      <%= t("restriction.locked_users.user_allowed_to_be_locked") %>
     </div>
     <% end %>
   <% end %>
 
-  <%= f.submit(class: "button", value: t("officing.locked_users.preview.submit")) if @in_census && !@has_voted %>
+  <%= f.submit(class: "button", value: t("restriction.locked_users.preview.submit")) if @in_census && !@has_voted %>
 <% end %>

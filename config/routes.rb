@@ -380,12 +380,6 @@ Rails.application.routes.draw do
     end
 
     namespace :officing do
-      namespace :budgets do
-        resources :locked_users do
-          post :preview, on: :collection
-        end
-      end
-      
       resources :polls, only: [:index] do
         get :final, on: :collection
 
@@ -403,6 +397,14 @@ Rails.application.routes.draw do
 
       resources :codes, only: [:index, :check] do 
         post :check, on: :collection
+      end
+    end
+
+    namespace :restriction do
+      root to: "dashboard#index"
+
+      resources :locked_users, only: [:index, :create, :show, :preview] do
+        post :preview, on: :collection
       end
     end
 

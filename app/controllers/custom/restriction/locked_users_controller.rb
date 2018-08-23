@@ -1,4 +1,4 @@
-class Officing::Budgets::LockedUsersController < Officing::BaseController
+class Restriction::LockedUsersController < Restriction::BaseController
 
   def index
     @locked_user = Budget::LockedUser.new()
@@ -6,9 +6,9 @@ class Officing::Budgets::LockedUsersController < Officing::BaseController
 
   def create
     if @locked_user = Budget::LockedUser.create(locked_user_params)
-      redirect_to officing_budgets_locked_user_path(@locked_user), notice: t('officing.locked_users.create.notice')
+      redirect_to restriction_locked_user_path(@locked_user), notice: t('restriction.locked_users.create.notice')
     else
-      flash.now[:error] = t('officing.locked_users.create.error')
+      flash.now[:error] = t('restriction.locked_users.create.error')
       render :preview
     end
   end
@@ -18,7 +18,7 @@ class Officing::Budgets::LockedUsersController < Officing::BaseController
   end
 
   def preview
-    byebug
+    #byebug
     params[:budget_locked_user][:document_number].upcase
     @locked_user = Budget::LockedUser.new(locked_user_params)
     @already_locked = false
@@ -35,9 +35,9 @@ class Officing::Budgets::LockedUsersController < Officing::BaseController
         document_verification = Verification::Management::Document.new(document_verification_params)
         if document_verification.valid?
           @in_census = false
-          if document_verification.in_census?
+          #if document_verification.in_census?
             @in_census = true
-          end
+          #end
           @has_voted = false
           if document_verification.user?
             @has_voted = Vote
