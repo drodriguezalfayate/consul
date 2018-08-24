@@ -18,7 +18,6 @@ class Restriction::LockedUsersController < Restriction::BaseController
   end
 
   def preview
-    #byebug
     params[:budget_locked_user][:document_number].upcase
     @locked_user = Budget::LockedUser.new(locked_user_params)
     @already_locked = false
