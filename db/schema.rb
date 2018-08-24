@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822095855) do
+ActiveRecord::Schema.define(version: 20180823103031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,6 +416,15 @@ ActiveRecord::Schema.define(version: 20180822095855) do
   end
 
   add_index "organizations", ["user_id"], name: "index_organizations_on_user_id", using: :btree
+
+  create_table "physical_final_votes", force: :cascade do |t|
+    t.string   "signable_type"
+    t.string   "booth"
+    t.integer  "total_votes"
+    t.integer  "signable_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "poll_answers", force: :cascade do |t|
     t.integer  "question_id"

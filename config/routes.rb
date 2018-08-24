@@ -202,6 +202,8 @@ Rails.application.routes.draw do
 
       resources :signature_sheets, only: [:index, :new, :create, :show]
 
+      resources :physical_final_votes, only: [:index, :new, :create, :show]
+
       resources :banners, only: [:index, :new, :create, :edit, :update, :destroy] do
         collection { get :search}
       end
@@ -434,4 +436,3 @@ Rails.application.routes.draw do
     get 'participatory_budget/welcome', to: 'pages#show', id: 'participatory_budget/welcome'
   end
 end
-
