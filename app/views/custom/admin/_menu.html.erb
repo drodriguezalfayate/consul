@@ -122,6 +122,10 @@
         <li <%= 'class=active' if controller_name == 'consultants' %>>
           <%= link_to t('admin.menu.consultants'), admin_consultants_path %>
         </li>
+
+        <li <%= 'class=active' if controller_name == 'signature_sheet_officers' %>>
+          <%= link_to t('admin.menu.signature_sheet_officers'), admin_signature_sheet_officers_path %>
+        </li>
       </ul>
     </li>
 

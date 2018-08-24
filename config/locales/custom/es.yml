@@ -11,6 +11,7 @@ es:
   layouts:
     header:
       consultation: "Consultas"
+      signature_sheet_officer: "Gestión voto presencial"
   consultation:
     codes:
       form:

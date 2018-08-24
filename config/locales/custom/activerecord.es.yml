@@ -4,3 +4,6 @@ es:
       consultant:
         one: "Consultor"
         other: "Consultores"
+      signature_sheet_officer:
+        one: "Gestor de votación presencial"
+        other: "Gestores de votación presencial"

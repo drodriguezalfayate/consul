@@ -238,6 +238,10 @@ Rails.application.routes.draw do
         get :search, on: :collection
       end
 
+      resources :signature_sheet_officers, only: [:index, :create, :destroy] do
+        get :search, on: :collection
+      end
+
       resources :administrators, only: [:index, :create, :destroy] do
         get :search, on: :collection
       end

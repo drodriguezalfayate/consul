@@ -10,8 +10,19 @@ es:
         email_placeholder: "Email"
         search: "Buscar"
         user_not_found: "Usuario no encontrado"
+    signature_sheet_officers:
+      signature_sheet_officer:
+        add: "Añadir"
+        delete: Eliminar
+      index:
+        title: "Gestores de votación presencial"
+      search:
+        email_placeholder: "Email"
+        search: "Buscar"
+        user_not_found: "Usuario no encontrado"
     menu:
       consultants: Consultores
+      signature_sheet_officers: "Gestores de votación presencial"
     stats:
       show:
         summary:
