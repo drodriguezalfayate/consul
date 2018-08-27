@@ -7,3 +7,6 @@ es:
       signature_sheet_officer:
         one: "Gestor de votación presencial"
         other: "Gestores de votación presencial"
+      physical_final_vote:
+        one: "Voto final presencial"
+        other: "Votos finales presenciales"

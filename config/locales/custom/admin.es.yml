@@ -23,8 +23,28 @@ es:
     menu:
       consultants: Consultores
       signature_sheet_officers: "Gestores de votación presencial"
+      physical_final_votes: Votos finales presenciales
     stats:
       show:
         summary:
           budget_votes: "PROYECTOS VOTADOS DEL PRESUPUESTO ACTUAL"
           budget_voters: "VOTOS DEL PRESUPUESTO ACTUAL"
+    physical_final_votes:
+      name: Votos finales presenciales
+      booth: Mesa electoral
+      total_votes: Votos totales
+      created_at: Creado el
+      no_physical_final_votes: No hay votos finales presenciales
+      new:
+        title: Asignar votos finales votación presencial
+        signable_type: Tipo
+        signable: ID Propuesta
+        booth: Mesa electoral
+        total_votes: Votos totales
+        submit: Crear
+      index:
+        new: Nuevo
+        title: Votos finales presenciales
+      show:
+        total_votes: "Votos totales:"
+        created_at: "Creado el "
