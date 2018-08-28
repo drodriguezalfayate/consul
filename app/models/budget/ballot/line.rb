@@ -12,6 +12,7 @@ class Budget
       validate :check_selected
       validate :check_sufficient_funds
       validate :check_valid_heading
+      validate :check_user_locked?
 
       scope :by_investment, -> (investment_id) { where(investment_id: investment_id) }
 
@@ -28,6 +29,15 @@ class Budget
       def check_selected
         errors.add(:investment, "unselected investment") unless investment.selected?
       end
+      
+      def check_user_locked?
+        user = self.ballot.user
+        budget_id = self.investment.budget_id
+
+        if Budget::LockedUser.where(document_number: user.document_number, document_type: user.document_type, budget_id: budget_id).exists?
+          errors.add(:investment, "Ya has votado presencialmente")
+        end
+      end
 
       private
 
@@ -36,6 +46,7 @@ class Budget
           self.group_id   ||= self.investment.try(:group_id)
           self.budget_id  ||= self.investment.try(:budget_id)
         end
+
     end
   end
 end
