@@ -2,13 +2,10 @@ class PhysicalFinalVote < ActiveRecord::Base
   belongs_to :signable, polymorphic: true
 
   VALID_SIGNABLES = %w(Budget::Investment)
+  
   validates :booth, presence: true
   validates :total_votes, presence: true
   validates :signable_type, inclusion: {in: VALID_SIGNABLES}
-
-  def signable
-    Budget::Investment.find(self.signable_id)
-  end
 
   def name
     "#{signable_name} #{signable_id}"
