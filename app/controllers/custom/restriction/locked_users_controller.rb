@@ -39,10 +39,7 @@ class Restriction::LockedUsersController < Restriction::BaseController
           #end
           @has_voted = false
           if document_verification.user?
-            @has_voted = Vote
-                          .where(voter: document_verification.user)
-                          .where(votable_id: @locked_user.budget.investment_ids)
-                          .count > 0
+            @has_voted = Budget::Ballot::Line.joins(:ballot).where(budget_ballots: { user_id: User.find_by(document_number: document_verification_params[:document_number])}).exists?
           end
         end
       end
