@@ -175,6 +175,14 @@
       </li>
     <% end %>
 
+    <% if feature?(:physical_final_votes) %>
+      <li class="section-title" <%= "class=active" if controller_name == "physical_final_votes" %>>
+        <%= link_to admin_physical_final_votes_path do %>
+          <strong><%= t("admin.menu.physical_final_votes") %></strong>
+        <% end %>
+      </li>
+    <% end %>
+
     <li <%= "class=active" if controller_name == "newsletter" %>>
       <%= link_to admin_newsletters_path do %>
         <span class="icon-zip"></span>
