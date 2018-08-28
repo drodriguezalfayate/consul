@@ -22,7 +22,12 @@ es:
         title: "Consultas"
     menu:
       codes: "Códigos de acceso"
-  officing:
+  restriction:
+    dashboard:
+      index:
+        title: Bloqueo voto presencial
+    header:
+      title: Bloqueo voto presencial
     locked_users:
       index:
         submit: "Validar documento"

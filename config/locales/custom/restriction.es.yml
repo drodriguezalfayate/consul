@@ -1,9 +1,10 @@
 ---
 es:
-  officing:
+  restriction:
     menu:
-      locked_users: Validar voto presencial
+      locked_users: Bloquear voto presencial
     locked_users:
+      budget: Presupuesto participativo
       error_form: "impidió validar este documento."
       document: "Documento:"
       form_errors: evitaron verificar este documento

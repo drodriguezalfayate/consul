@@ -1,0 +1,6 @@
+---
+es:
+  budgets:
+    ballots:
+      reasons_for_not_balloting:
+        user_locked: "Ya has votado presencialmente"

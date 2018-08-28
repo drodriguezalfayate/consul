@@ -48,3 +48,7 @@ es:
       show:
         total_votes: "Votos totales:"
         created_at: "Creado el "
+    budget_investments:
+      index:
+        physical_final_votes_count: Votos presenciales
+        final_total_votes: Total votos

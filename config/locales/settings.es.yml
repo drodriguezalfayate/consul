@@ -36,6 +36,7 @@ es:
       polls: Votaciones
       signature_sheets: Hojas de firmas
       spending_proposals: Propuestas de inversión
+      physical_final_votes: Votos finales presenciales
       spending_proposal_features:
         voting_allowed: Votaciones sobre propuestas de inversión
     mailer_from_name: Nombre email remitente
