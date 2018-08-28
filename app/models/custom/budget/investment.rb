@@ -3,12 +3,30 @@ require_dependency Rails.root.join('app', 'models', 'budget', 'investment').to_s
 class Budget
   class Investment < ActiveRecord::Base
 
+    has_many :physical_final_votes, as: :signable
+
     def permission_problem(user)
       return :not_logged_in unless user
       return :organization  if user.organization?
       return :not_verified  unless user.can?(:vote, Budget::Investment)
       return :user_locked if user_locked?(user)
       return nil
+    end
+
+    def reason_for_not_being_ballotable_by(user, ballot)
+      return :not_selected               unless selected?
+      return :no_ballots_allowed         unless budget.balloting?
+      return :different_heading_assigned unless ballot.valid_heading?(heading)
+      return :not_enough_money_html      if ballot.present? && !enough_money?(ballot)
+      return :user_locked                if user_locked?(user)
+    end
+
+    def physical_final_votes_count
+      physical_final_votes.to_a.sum(&:total_votes)
+    end
+
+    def final_total_votes
+      ballot_lines_count + physical_final_votes_count
     end
 
     private
