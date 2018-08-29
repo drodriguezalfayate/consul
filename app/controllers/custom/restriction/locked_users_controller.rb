@@ -34,9 +34,9 @@ class Restriction::LockedUsersController < Restriction::BaseController
         document_verification = Verification::Management::Document.new(document_verification_params)
         if document_verification.valid?
           @in_census = false
-          #if document_verification.in_census?
+          if document_verification.in_census?
             @in_census = true
-          #end
+          end
           @has_voted = false
           if document_verification.user?
             @has_voted = Budget::Ballot::Line.joins(:ballot).where(budget_ballots: { user_id: User.find_by(document_number: document_verification_params[:document_number])}).exists?
