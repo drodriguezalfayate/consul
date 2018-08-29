@@ -10,10 +10,14 @@ class Admin::PhysicalFinalVotesController < Admin::BaseController
 
   def create
     @physical_final_vote = PhysicalFinalVote.new(physical_final_vote_params)
-    if @physical_final_vote.save
-      redirect_to [:admin, @physical_final_vote], notice: I18n.t('flash.actions.create.physical_final_vote')
+    if Budget::Investment.where(id: physical_final_vote_params[:signable_id]).present?
+      if @physical_final_vote.save
+        redirect_to [:admin, @physical_final_vote], notice: I18n.t('flash.actions.create.physical_final_vote')
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to new_admin_physical_final_vote_path, flash: { error: t('admin.physical_final_votes.new.error') }
     end
   end
 

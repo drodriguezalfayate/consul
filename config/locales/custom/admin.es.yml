@@ -42,6 +42,7 @@ es:
         booth: Mesa electoral
         total_votes: Votos totales
         submit: Crear
+        error: El ID de propuesta no concuerda con ninguna propuesta existente.
       index:
         new: Nuevo
         title: Votos finales presenciales

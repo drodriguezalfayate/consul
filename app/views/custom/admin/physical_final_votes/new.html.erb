@@ -5,12 +5,7 @@
 <%= form_for [:admin, @physical_final_vote] do |f| %>
   <%= render 'shared/errors',
               resource: @physical_final_vote %>
-
-  <div class="small-12 medium-6 large-4">
-      <label for="physical_final_vote_signable_type"><%= t("admin.physical_final_votes.new.signable_type") %></label>
-      <input type="hidden" name="physical_final_vote[signable_type]" id="physical_final_vote_signable_type" value="Budget::Investment" readonly="readonly">
-      <input type="text" name="" id="" value="Proyectos de inversión" readonly="readonly">
-  </div>
+  <input type="hidden" name="physical_final_vote[signable_type]" id="physical_final_vote_signable_type" value="Budget::Investment" readonly="readonly">
 
   <div class="small-12 medium-6 large-4">
     <%= f.text_field :signable_id, label: t("admin.physical_final_votes.new.signable") %>
