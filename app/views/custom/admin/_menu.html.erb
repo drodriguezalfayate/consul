@@ -122,6 +122,10 @@
         <li <%= 'class=active' if controller_name == 'consultants' %>>
           <%= link_to t('admin.menu.consultants'), admin_consultants_path %>
         </li>
+
+        <li <%= 'class=active' if controller_name == 'signature_sheet_officers' %>>
+          <%= link_to t('admin.menu.signature_sheet_officers'), admin_signature_sheet_officers_path %>
+        </li>
       </ul>
     </li>
 
@@ -167,6 +171,14 @@
       <li class="section-title" <%= "class=active" if controller_name == "signature_sheets" %>>
         <%= link_to admin_signature_sheets_path do %>
           <strong><%= t("admin.menu.signature_sheets") %></strong>
+        <% end %>
+      </li>
+    <% end %>
+
+    <% if feature?(:physical_final_votes) %>
+      <li class="section-title" <%= "class=active" if controller_name == "physical_final_votes" %>>
+        <%= link_to admin_physical_final_votes_path do %>
+          <strong><%= t("admin.menu.physical_final_votes") %></strong>
         <% end %>
       </li>
     <% end %>

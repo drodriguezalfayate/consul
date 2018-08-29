@@ -30,4 +30,10 @@
     </li>
   <% end %>
 
+  <% if current_user.administrator? || current_user.signature_sheet_officer? %>
+    <li>
+      <%= link_to t("layouts.header.signature_sheet_officer"), restriction_root_path %>
+    </li>
+  <% end %>
+
 <% end %>

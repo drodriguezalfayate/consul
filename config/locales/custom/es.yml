@@ -11,6 +11,7 @@ es:
   layouts:
     header:
       consultation: "Consultas"
+      signature_sheet_officer: "Gestión voto presencial"
   consultation:
     codes:
       form:
@@ -21,3 +22,12 @@ es:
         title: "Consultas"
     menu:
       codes: "Códigos de acceso"
+  restriction:
+    dashboard:
+      index:
+        title: Bloqueo voto presencial
+    header:
+      title: Bloqueo voto presencial
+    locked_users:
+      index:
+        submit: "Validar documento"

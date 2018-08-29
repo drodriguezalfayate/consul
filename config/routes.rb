@@ -202,6 +202,8 @@ Rails.application.routes.draw do
 
       resources :signature_sheets, only: [:index, :new, :create, :show]
 
+      resources :physical_final_votes, only: [:index, :new, :create, :show]
+
       resources :banners, only: [:index, :new, :create, :edit, :update, :destroy] do
         collection { get :search}
       end
@@ -233,6 +235,10 @@ Rails.application.routes.draw do
       end
 
       resources :consultants, only: [:index, :create, :destroy] do
+        get :search, on: :collection
+      end
+
+      resources :signature_sheet_officers, only: [:index, :create, :destroy] do
         get :search, on: :collection
       end
 
@@ -400,6 +406,14 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :restriction do
+      root to: "dashboard#index"
+
+      resources :locked_users, only: [:index, :create, :show, :preview] do
+        post :preview, on: :collection
+      end
+    end
+
     if Rails.env.development?
       mount LetterOpenerWeb::Engine, at: "/letter_opener"
     end
@@ -426,4 +440,3 @@ Rails.application.routes.draw do
     get 'participatory_budget/welcome', to: 'pages#show', id: 'participatory_budget/welcome'
   end
 end
-

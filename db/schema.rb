@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180531100148) do
+ActiveRecord::Schema.define(version: 20180823103031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,18 @@ ActiveRecord::Schema.define(version: 20180531100148) do
   add_index "budget_investments", ["heading_id"], name: "index_budget_investments_on_heading_id", using: :btree
   add_index "budget_investments", ["tsv"], name: "index_budget_investments_on_tsv", using: :gin
 
+  create_table "budget_locked_users", force: :cascade do |t|
+    t.string   "document_number"
+    t.string   "document_type"
+    t.integer  "budget_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "budget_locked_users", ["budget_id", "document_number"], name: "unique_contraint_index_on_budget_locked_user", unique: true, using: :btree
+  add_index "budget_locked_users", ["budget_id"], name: "index_budget_locked_users_on_budget_id", using: :btree
+  add_index "budget_locked_users", ["document_number"], name: "index_budget_locked_users_on_document_number", using: :btree
+
   create_table "budget_reclassified_votes", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "investment_id"
@@ -249,10 +261,10 @@ ActiveRecord::Schema.define(version: 20180531100148) do
     t.string   "visit_id"
     t.datetime "hidden_at"
     t.integer  "flags_count",                             default: 0
+    t.datetime "ignored_flag_at"
     t.integer  "cached_votes_total",                      default: 0
     t.integer  "cached_votes_up",                         default: 0
     t.integer  "cached_votes_down",                       default: 0
-    t.datetime "ignored_flag_at"
     t.integer  "comments_count",                          default: 0
     t.datetime "confirmed_hide_at"
     t.integer  "cached_anonymous_votes_total",            default: 0
@@ -271,7 +283,6 @@ ActiveRecord::Schema.define(version: 20180531100148) do
   add_index "debates", ["cached_votes_total"], name: "index_debates_on_cached_votes_total", using: :btree
   add_index "debates", ["cached_votes_up"], name: "index_debates_on_cached_votes_up", using: :btree
   add_index "debates", ["confidence_score"], name: "index_debates_on_confidence_score", using: :btree
-  add_index "debates", ["description"], name: "index_debates_on_description", using: :btree
   add_index "debates", ["geozone_id"], name: "index_debates_on_geozone_id", using: :btree
   add_index "debates", ["hidden_at"], name: "index_debates_on_hidden_at", using: :btree
   add_index "debates", ["hot_score"], name: "index_debates_on_hot_score", using: :btree
@@ -405,6 +416,15 @@ ActiveRecord::Schema.define(version: 20180531100148) do
   end
 
   add_index "organizations", ["user_id"], name: "index_organizations_on_user_id", using: :btree
+
+  create_table "physical_final_votes", force: :cascade do |t|
+    t.string   "signable_type"
+    t.string   "booth"
+    t.integer  "total_votes"
+    t.integer  "signable_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "poll_answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -623,7 +643,6 @@ ActiveRecord::Schema.define(version: 20180531100148) do
   add_index "proposals", ["author_id"], name: "index_proposals_on_author_id", using: :btree
   add_index "proposals", ["cached_votes_up"], name: "index_proposals_on_cached_votes_up", using: :btree
   add_index "proposals", ["confidence_score"], name: "index_proposals_on_confidence_score", using: :btree
-  add_index "proposals", ["description"], name: "index_proposals_on_description", using: :btree
   add_index "proposals", ["geozone_id"], name: "index_proposals_on_geozone_id", using: :btree
   add_index "proposals", ["hidden_at"], name: "index_proposals_on_hidden_at", using: :btree
   add_index "proposals", ["hot_score"], name: "index_proposals_on_hot_score", using: :btree
@@ -638,6 +657,14 @@ ActiveRecord::Schema.define(version: 20180531100148) do
   end
 
   add_index "settings", ["key"], name: "index_settings_on_key", using: :btree
+
+  create_table "signature_sheet_officers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "signature_sheet_officers", ["user_id"], name: "index_signature_sheet_officers_on_user_id", using: :btree
 
   create_table "signature_sheets", force: :cascade do |t|
     t.integer  "signable_id"
@@ -831,7 +858,7 @@ ActiveRecord::Schema.define(version: 20180531100148) do
     t.boolean  "email_digest",                              default: true
     t.boolean  "email_on_direct_message",                   default: true
     t.boolean  "official_position_badge",                   default: false
-    t.datetime "password_changed_at",                       default: '2016-11-23 10:59:20', null: false
+    t.datetime "password_changed_at",                       default: '2018-04-17 09:34:32', null: false
     t.boolean  "created_from_signature",                    default: false
     t.integer  "failed_email_digests_count",                default: 0
     t.text     "former_users_data_log",                     default: ""
@@ -927,6 +954,7 @@ ActiveRecord::Schema.define(version: 20180531100148) do
   add_foreign_key "administrators", "users"
   add_foreign_key "annotations", "legislations"
   add_foreign_key "annotations", "users"
+  add_foreign_key "budget_locked_users", "budgets"
   add_foreign_key "consultants", "users"
   add_foreign_key "failed_census_calls", "poll_officers"
   add_foreign_key "failed_census_calls", "users"
@@ -958,6 +986,7 @@ ActiveRecord::Schema.define(version: 20180531100148) do
   add_foreign_key "poll_voters", "polls"
   add_foreign_key "poll_white_results", "poll_booth_assignments", column: "booth_assignment_id"
   add_foreign_key "poll_white_results", "poll_officer_assignments", column: "officer_assignment_id"
+  add_foreign_key "signature_sheet_officers", "users"
   add_foreign_key "users", "geozones"
   add_foreign_key "valuators", "users"
 end

@@ -10,10 +10,46 @@ es:
         email_placeholder: "Email"
         search: "Buscar"
         user_not_found: "Usuario no encontrado"
+    signature_sheet_officers:
+      signature_sheet_officer:
+        add: "Añadir"
+        delete: Eliminar
+      index:
+        title: "Gestores de votación presencial"
+      search:
+        email_placeholder: "Email"
+        search: "Buscar"
+        user_not_found: "Usuario no encontrado"
     menu:
       consultants: Consultores
+      signature_sheet_officers: "Gestores de votación presencial"
+      physical_final_votes: Votos finales presenciales
     stats:
       show:
         summary:
           budget_votes: "PROYECTOS VOTADOS DEL PRESUPUESTO ACTUAL"
           budget_voters: "VOTOS DEL PRESUPUESTO ACTUAL"
+    physical_final_votes:
+      name: Votos finales presenciales
+      booth: Mesa electoral
+      total_votes: Votos totales
+      created_at: Creado el
+      no_physical_final_votes: No hay votos finales presenciales
+      new:
+        title: Asignar votos finales votación presencial
+        signable_type: Tipo
+        signable: ID Propuesta
+        booth: Mesa electoral
+        total_votes: Votos totales
+        submit: Crear
+        error: El ID de propuesta no concuerda con ninguna propuesta existente.
+      index:
+        new: Nuevo
+        title: Votos finales presenciales
+      show:
+        total_votes: "Votos totales:"
+        created_at: "Creado el "
+    budget_investments:
+      index:
+        physical_final_votes_count: Votos presenciales
+        final_total_votes: Total votos

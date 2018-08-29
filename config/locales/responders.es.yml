@@ -13,6 +13,7 @@ es:
         spending_proposal: "Propuesta de inversión creada correctamente. Puedes acceder a ella desde %{activity}"
         budget_investment: "Propuesta de inversión creada correctamente."
         signature_sheet: "Hoja de firmas creada correctamente"
+        physical_final_vote: "Votos físicos asignados correctamente"
       save_changes:
         notice: Cambios guardados
       update:
