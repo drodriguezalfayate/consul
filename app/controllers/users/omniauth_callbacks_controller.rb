@@ -33,8 +33,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       auth = env["omniauth.auth"]
       
       if auth.info.invalid_credentials
-	
-	if provider.to_s == 'ldap'
+  
+        if provider.to_s == 'ldap'
           redirect_to new_ldap_path, alert: 'Datos de acceso incorrectos.'
         else
           redirect_to new_codigo_path, alert: 'Datos de acceso incorrectos.'
@@ -51,18 +51,28 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       identity = Identity.first_or_create_from_oauth(auth)
       @user = current_user || identity.user || User.first_or_initialize_for_oauth(auth)
       
-      
       if provider.to_s == 'codigo'
         auth.info.verified = true
 
-        @user.skip_email_validation = true
-        @user.document_type   = auth.info.document_type
-        @user.document_number = auth.info.document_number
-        @user.confirmed_at = Time.current
-        @user.verified_at  = Time.current
+        # Buscamos si existe un usuario verificado con el
+        # mismo número de documento, si ya existe lo único
+        # que hacemos es asignarle el nuevo 'identity'
+
+        registered_user = User.level_three_verified.where(document_number: auth.info.document_number).where.not(email: nil).try(:first)
+        
+        if registered_user.present?
+          @user = registered_user
+        else
+          @user.skip_email_validation = true
+          @user.document_type   = auth.info.document_type
+          @user.document_number = auth.info.document_number
+          @user.confirmed_at = Time.current
+          @user.verified_at  = Time.current
+        end
+        
       end
       
-      if save_user(@user)
+      if registered_user.present? || save_user(@user)
 
         identity.update(user: @user)
         sign_in_and_redirect @user, event: :authentication
@@ -73,7 +83,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session["devise.#{provider}_data"] = auth
 
         if provider.to_s == 'ldap'
-	  redirect new_ldap_path
+          redirect new_ldap_path
         else
           redirect_to new_user_registration_url
         end
