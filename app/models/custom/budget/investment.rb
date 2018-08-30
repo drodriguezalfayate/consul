@@ -14,6 +14,7 @@ class Budget
     end
 
     def reason_for_not_being_ballotable_by(user, ballot)
+      return permission_problem(user)    if permission_problem?(user)
       return :not_selected               unless selected?
       return :no_ballots_allowed         unless budget.balloting?
       return :different_heading_assigned unless ballot.valid_heading?(heading)
