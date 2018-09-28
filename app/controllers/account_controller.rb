@@ -7,6 +7,8 @@ class AccountController < ApplicationController
   end
 
   def update
+    @account.skip_email_validation = true if @account.identities.exists?(provider: "codigo")
+      
     if @account.update(account_params)
       redirect_to account_path, notice: t("flash.actions.save_changes.notice")
     else
