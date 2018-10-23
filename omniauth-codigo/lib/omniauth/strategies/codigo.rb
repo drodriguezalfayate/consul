@@ -11,19 +11,16 @@ module OmniAuth
       option :puerto, 8080
 
       def request_phase
-        
-	redirect options[:url_formulario]
-
+        redirect options[:url_formulario]
       end
 
       def callback_phase
-
         clave = request['clave']
         valor = request['valor']
-        
+
         respuesta_http = HTTParty.post( options[:url_api], :body => {:clave => clave, :valor => valor}.to_json, :headers => {'Content-Type' => 'application/json'} )
-	respuesta_api_json = JSON.parse( respuesta_http.body )
-        
+        respuesta_api_json = JSON.parse( respuesta_http.body )
+
         @user_info = {}
 
         logger = Logger.new(STDOUT)
@@ -42,9 +39,7 @@ module OmniAuth
           @user_info['invalid_credentials'] = true
         end
 
-
         super
-	
       end
 
       uid {
@@ -56,7 +51,7 @@ module OmniAuth
 
       def missing_credentials?
         request['username'].nil? or request['username'].empty? or request['password'].nil? or request['password'].empty?
-      end # missing_credentials?
+      end
     end
 
   end

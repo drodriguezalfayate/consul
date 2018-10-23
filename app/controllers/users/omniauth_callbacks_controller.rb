@@ -26,14 +26,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-    def sign_in_with( feature, provider )
-      
+    def sign_in_with(feature, provider)
       raise ActionController::RoutingError.new('Not Found') unless Setting["feature.#{feature}"]
 
       auth = env["omniauth.auth"]
-      
+
       if auth.info.invalid_credentials
-  
+
         if provider.to_s == 'ldap'
           redirect_to new_ldap_path, alert: 'Datos de acceso incorrectos.'
         else
@@ -50,7 +49,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       identity = Identity.first_or_create_from_oauth(auth)
       @user = current_user || identity.user || User.first_or_initialize_for_oauth(auth)
-      
+
       if provider.to_s == 'codigo'
         auth.info.verified = true
 
@@ -58,20 +57,22 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         # mismo número de documento, si ya existe lo único
         # que hacemos es asignarle el nuevo 'identity'
 
-        registered_user = User.level_three_verified.where(document_number: auth.info.document_number).where.not(email: nil).try(:first)
-        
+        registered_user = User.where(document_number: auth.info.document_number).try(:first)
+
         if registered_user.present?
           @user = registered_user
-        else
-          @user.skip_email_validation = true
+        end
+
+        @user.skip_email_validation = true
+        
+        if !@user.level_two_or_three_verified?
           @user.document_type   = auth.info.document_type
           @user.document_number = auth.info.document_number
           @user.confirmed_at = Time.current
           @user.verified_at  = Time.current
         end
-        
       end
-      
+
       if registered_user.present? || save_user(@user)
 
         identity.update(user: @user)
