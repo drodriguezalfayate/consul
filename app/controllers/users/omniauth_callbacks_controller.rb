@@ -64,6 +64,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
 
         @user.skip_email_validation = true
+        @user.registering_with_oauth = false
         
         if !@user.level_two_or_three_verified?
           @user.document_type   = auth.info.document_type
@@ -92,7 +93,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     def save_user(user)
-      @user.save || @user.save_requiring_finish_signup
+      user.save || user.save_requiring_finish_signup
     end
 
 end
