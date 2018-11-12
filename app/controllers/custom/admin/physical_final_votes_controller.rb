@@ -25,6 +25,14 @@ class Admin::PhysicalFinalVotesController < Admin::BaseController
     @physical_final_vote = PhysicalFinalVote.find(params[:id])
   end
 
+  def destroy
+    @physical_final_vote = PhysicalFinalVote.find(params[:id])
+
+    @physical_final_vote.destroy if @physical_final_vote.present?
+
+    redirect_to admin_physical_final_votes_path, notice: t("admin.physical_final_votes.flash.destroyed")
+  end
+
   private
 
     def physical_final_vote_params

@@ -10,6 +10,7 @@
       <th><%= t("admin.physical_final_votes.booth") %></th>
       <th><%= t("admin.physical_final_votes.total_votes") %></th>
       <th><%= t("admin.physical_final_votes.created_at") %></th>
+      <th></th>
     </tr>
     <% @physical_final_votes.each do |physical_final_vote| %>
       <tr id="<%= dom_id(physical_final_vote) %>" class="physical_final_vote">
@@ -25,6 +26,7 @@
         <td>
           <%= l(physical_final_vote.created_at, format: :short) %>
         </td>
+        <td><%= link_to t("admin.physical_final_votes.index.delete"), admin_physical_final_vote_path(physical_final_vote),  method: :delete, data: { confirm: t("admin.physical_final_votes.index.confirm_delete") }, class: 'button alert' %></td>
       </tr>
     <% end %>
   </table>

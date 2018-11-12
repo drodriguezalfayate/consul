@@ -46,9 +46,13 @@ es:
       index:
         new: Nuevo
         title: Votos finales presenciales
+        delete: "Eliminar"
+        confirm_delete: "Confirmar acción"
       show:
         total_votes: "Votos totales:"
         created_at: "Creado el "
+      flash:
+        destroyed: 'Registro eliminado correctamente'
     budget_investments:
       index:
         physical_final_votes_count: Votos presenciales
