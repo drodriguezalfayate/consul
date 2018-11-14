@@ -3,3 +3,4 @@ es:
   settings:
     feature:
       admin_expire_passwords: 'Obligar a los usuarios administradores a actualizar su password cada año'
+      proposals: "Propuestas"
