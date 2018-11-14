@@ -18,14 +18,14 @@ module Abilities
       end
       can [:retire_form, :retire], Proposal, author_id: user.id
 
-      #can :create, Comment
+      can :create, Comment
       can :create, Debate
       can :create, Proposal
 
       can :suggest, Debate
       can :suggest, Proposal
 
-      #can [:flag, :unflag], Comment
+      can [:flag, :unflag], Comment
       cannot [:flag, :unflag], Comment, user_id: user.id
 
       can [:flag, :unflag], Debate
@@ -36,7 +36,7 @@ module Abilities
 
       unless user.organization?
         can :vote, Debate
-      #  can :vote, Comment
+        can :vote, Comment
       end
 
       can :create, Budget::Investment,               budget: { phase: "accepting" }
