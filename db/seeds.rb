@@ -80,6 +80,7 @@ Setting['feature.budgets'] = true
 Setting['feature.signature_sheets'] = true
 Setting['feature.physical_final_votes'] = true
 Setting['feature.admin_expire_passwords'] = false
+Setting['feature.proposals'] = false
 
 # Spending proposals feature flags
 Setting['feature.spending_proposal_features.voting_allowed'] = nil
