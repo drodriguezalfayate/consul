@@ -111,4 +111,4 @@ gem 'omniauth-codigo', :path => './omniauth-codigo'
 gem 'rest-client'
 gem 'httparty'
 
-# eval_gemfile './Gemfile_custom'
+eval_gemfile './Gemfile_custom'
