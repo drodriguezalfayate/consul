@@ -3,6 +3,338 @@ require 'axlsx'
 
 namespace :data do
   namespace :budgets do
+    desc "Eliminar los usuarios duplicados con votos en los diferentes presupuestos"
+    task duplicated_voters: :environment do
+      print "Ejecutando script..."
+      documents = User.all.map(&:document_number).compact
+      documents.count - documents.uniq.count
+      duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
+
+      users_to_delete = []
+      groups = User.where(document_number: duplicated).group_by(&:document_number).values
+      groups_2 = groups.select { |g| g.count == 2 }
+      puts
+      print "Tratando usuarios duplicados"
+      groups_2.each do |user_group|
+
+        # Si alguno de los usuarios del grupo tiene email
+        if user_group.map(&:email).compact.present?
+          # Separamos los usuarios por los que tienen email y los que no
+          users_with_email = user_group.select { |ug| ug.email.present? }
+          users_without_email = user_group - users_with_email
+
+          # Miramos si hay votos.
+          if Budget::Ballot.where(user: user_group).present?
+            case users_with_email.count
+            when 1
+              users_without_email.each do |user_without_email|
+                  users_with_email.first.take_votes_from(user_without_email)
+              end
+
+              users_without_email.each do |user|
+                  users_to_delete.push(user)
+              end
+            when 2
+              last_voter = Array(Budget::Ballot.where(user: users_with_email).order(:created_at).last.user)
+              with_email_to_delete = users_with_email - last_voter
+              last_voter.first.take_votes_from(with_email_to_delete.first)
+
+              with_email_to_delete.each do |user|
+                  users_to_delete.push(user)
+              end
+              users_without_email.each do |user|
+                  users_to_delete.push(user)
+              end
+            end
+
+          # En caso de no haber votos se deja el último usuario con email
+          else
+            # Último usuario creado con email
+            user_to_save = Array(users_with_email.max_by(&:created_at))
+
+            users_with_email_to_delete = users_with_email - user_to_save
+
+            users_without_email.each do |user|
+                users_to_delete.push(user)
+            end
+            users_with_email_to_delete.each do |user|
+                users_to_delete.push(user)
+            end
+          end
+
+          # Si ningún usuario tiene email
+        else
+          users_voted = Budget::Ballot.where(user: user_group).map(&:user).uniq
+          users_not_voted = user_group - users_voted
+
+          case users_voted.count
+          when 0
+            # Si de los usuarios sin email no ha votado ninguno, se eliminan todos los usuarios excepto el último en ser creado.
+            last_created = Array(user_group.max_by(&:created_at))
+            other_users = user_group - last_created
+
+            other_users.each do |user|
+                users_to_delete.push(user)
+            end
+          when 1
+            # Si de los usuarios sin email solo ha votado uno, se mantiene ese y se borran los demás.    
+            users_not_voted.each do |user|
+                users_to_delete.push(user)
+            end
+          when 2
+            # De los usuarios sin email que tengan votos. Si hay 2 usuarios con votos se pasan del primero que haya votado al último.
+            last_voter = Budget::Ballot.where(user: users_voted).order(:created_at).last.user
+            first_voter = Budget::Ballot.where(user: users_voted).order(:created_at).first.user
+
+            last_voter.take_votes_from(first_voter)
+            users_to_delete.push(first_voter)
+          end
+        end
+      end
+
+      # Eliminando usuarios duplicados
+      users_to_delete.each do |user|
+        user.destroy
+      end
+
+      puts " ✅"
+      print "Tratando usuarios triplicados"
+      documents = User.all.map(&:document_number).compact
+      documents.count - documents.uniq.count
+      duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
+
+      users_to_delete = []
+      groups = User.where(document_number: duplicated).group_by(&:document_number).values
+      groups_3 = groups.select { |g| g.count == 3 }
+
+      groups_3.each do |user_group|
+        # Si alguno de los usuarios del grupo tiene email
+        if user_group.map(&:email).compact.present?
+          # Separamos los usuarios por los que tienen email y los que no
+          users_with_email = user_group.select { |ug| ug.email.present? }
+          users_without_email = user_group - users_with_email
+
+          # Miramos si hay votos.
+          if Budget::Ballot.where(user: user_group).present?
+            case users_with_email.count
+            when 1
+              users_without_email.each do |user_without_email|
+                  users_with_email.first.take_votes_from(user_without_email)
+              end
+
+              users_without_email.each do |user|
+                  users_to_delete.push(user)
+              end
+            when 2
+              last_voter = Array(Budget::Ballot.where(user: users_with_email).order(:created_at).last.user)
+              with_email_to_delete = users_with_email - last_voter
+              last_voter.first.take_votes_from(with_email_to_delete.first)
+
+              with_email_to_delete.each do |user|
+                  users_to_delete.push(user)
+              end
+              users_without_email.each do |user|
+                  users_to_delete.push(user)
+              end
+            when 3
+              last_voter = Array(Budget::Ballot.where(user: users_with_email).order(:created_at).last.user)
+              with_email_to_delete = users_with_email - last_voter
+
+              with_email_to_delete.each do |user_w_email|
+                  last_voter.first.take_votes_from(user_w_email)
+              end
+
+              with_email_to_delete.each do |user|
+                  users_to_delete.push(user)
+              end
+              users_without_email.each do |user|
+                  users_to_delete.push(user)
+              end
+            end
+
+          # En caso de no haber votos se deja el último usuario con email
+          else
+              # Último usuario creado con email
+              user_to_save = Array(users_with_email.max_by(&:created_at))
+
+              users_with_email_to_delete = users_with_email - user_to_save
+
+              users_without_email.each do |user|
+                  users_to_delete.push(user)
+              end
+              users_with_email_to_delete.each do |user|
+                  users_to_delete.push(user)
+              end
+          end
+
+        # Si ningún usuario tiene email
+        else
+          users_voted = Budget::Ballot.where(user: user_group).map(&:user).uniq
+          users_not_voted = user_group - users_voted
+
+          case users_voted.count
+          when 0
+            # Si de los usuarios sin email no ha votado ninguno, se eliminan todos los usuarios excepto el último en ser creado.
+            last_created = Array(user_group.max_by(&:created_at))
+            other_users = user_group - last_created
+
+            other_users.each do |user|
+                users_to_delete.push(user)
+            end
+          when 1
+            # Si de los usuarios sin email solo ha votado uno, se mantiene ese y se borran los demás.    
+            users_not_voted.each do |user|
+                users_to_delete.push(user)
+            end
+          when 2
+            # De los usuarios sin email que tengan votos. Si hay 2 usuarios con votos se pasan del primero que haya votado al último.
+            last_voter = Budget::Ballot.where(user: users_voted).order(:created_at).last.user
+            first_voter = Budget::Ballot.where(user: users_voted).order(:created_at).first.user
+
+            last_voter.take_votes_from(first_voter)
+            first_voter.each do |user|
+                users_to_delete.push(user)
+            end
+          when 3
+            # De los usuarios sin email que tengan votos. Si hay 3 usuarios se busca el que haya votado último y se transfieren los votos de los otros dos
+            last_voter = Array(Budget::Ballot.where(user: users_voted).order(:created_at).last.user)
+            other_voters = users_voted - last_voter
+            other_voters.each do |other_voter|
+                last_voter.first.take_votes_from(other_voter)
+            end
+            (other_voters).each do |user|
+                users_to_delete.push(user)
+            end
+          end
+        end
+      end
+
+      # Eliminando usuarios triplicados
+      users_to_delete.each do |user|
+        user.destroy
+      end
+
+      puts " ✅"
+      print "Tratando usuarios cuadruplicados"
+      documents = User.all.map(&:document_number).compact
+      documents.count - documents.uniq.count
+      duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
+
+      users_to_delete = []
+      groups = User.where(document_number: duplicated).group_by(&:document_number).values
+      groups_4 = groups.select { |g| g.count == 4 }
+
+      groups_4.each do |user_group|
+          # Si alguno de los usuarios del grupo tiene email
+        if user_group.map(&:email).compact.present?
+          # Separamos los usuarios por los que tienen email y los que no
+          users_with_email = user_group.select { |ug| ug.email.present? }
+          users_without_email = user_group - users_with_email
+
+          # Miramos si hay votos.
+          if Budget::Ballot.where(user: user_group).present?
+            case users_with_email.count
+            when 1
+              users_without_email.each do |user_without_email|
+                users_with_email.first.take_votes_from(user_without_email)
+              end
+
+              users_without_email.each do |user|
+                users_to_delete.push(user)
+              end
+            when 2
+              last_voter = Array(Budget::Ballot.where(user: users_with_email).order(:created_at).last.user)
+              with_email_to_delete = users_with_email - last_voter
+              last_voter.first.take_votes_from(with_email_to_delete.first)
+
+              with_email_to_delete.each do |user|
+                users_to_delete.push(user)
+              end
+              users_without_email.each do |user|
+                users_to_delete.push(user)
+              end
+            when 3, 4
+              last_voter = Array(Budget::Ballot.where(user: users_with_email).order(:created_at).last.user)
+              with_email_to_delete = users_with_email - last_voter
+
+              with_email_to_delete.each do |user_w_email|
+                last_voter.first.take_votes_from(user_w_email)
+              end
+
+              with_email_to_delete.each do |user|
+                users_to_delete.push(user)
+              end
+              users_without_email.each do |user|
+                users_to_delete.push(user)
+              end
+            end
+
+          # En caso de no haber votos se deja el último usuario con email
+          else
+            # Último usuario creado con email
+            user_to_save = Array(users_with_email.max_by(created_at))
+
+            users_with_email_to_delete = users_with_email - user_to_save
+
+            users_without_email.each do |user|
+              users_to_delete.push(user)
+            end
+            users_with_email_to_delete.each do |user|
+              users_to_delete.push(user)
+            end
+          end
+
+        # Si ningún usuario tiene email
+        else
+          users_voted = Budget::Ballot.where(user: user_group).map(&:user).uniq
+          users_not_voted = user_group - users_voted
+
+          case users_voted.count
+          when 0
+            # Si de los usuarios sin email no ha votado ninguno, se eliminan todos los usuarios excepto el último en ser creado.
+            last_created = Array(user_group.max_by(created_at))
+            other_users = user_group - last_created
+
+            other_users.each do |user|
+                users_to_delete.push(user)
+            end
+          when 1
+            # Si de los usuarios sin email solo ha votado uno, se mantiene ese y se borran los demás.    
+            users_not_voted.each do |user|
+              users_to_delete.push(user)
+            end
+          when 2
+            # De los usuarios sin email que tengan votos. Si hay 2 usuarios con votos se pasan del primero que haya votado al último.
+            last_voter = Budget::Ballot.where(user: users_voted).order(:created_at).last.user
+            first_voter = Budget::Ballot.where(user: users_voted).order(:created_at).first.user
+
+            last_voter.take_votes_from(first_voter)
+            first_voter.each do |user|
+              users_to_delete.push(user)
+            end
+          when 3, 4
+            # De los usuarios sin email que tengan votos. Si hay 3 usuarios se busca el que haya votado último y se transfieren los votos de los otros dos
+            last_voter = Array(Budget::Ballot.where(user: users_voted).order(:created_at).last.user)
+            other_voters = users_voted - last_voter
+            other_voters.each do |other_voter|
+              last_voter.first.take_votes_from(other_voter)
+            end
+            other_voters.each do |user|
+              users_to_delete.push(user)
+            end
+          end
+        end
+      end
+
+      # Eliminando usuarios cuadruplicados
+      users_to_delete.each do |user|
+        user.destroy
+      end
+      
+      puts " ✅"
+      puts "Ejecución completada correctamente"
+    end
+
     desc "Obtener un excel con los datos de todas las votaciones"
     task final_votes: :environment do
       p = Axlsx::Package.new
