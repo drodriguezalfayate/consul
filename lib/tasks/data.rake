@@ -3,6 +3,19 @@ require 'axlsx'
 
 namespace :data do
   namespace :budgets do
+    desc "Comprobación final de que no quedan usuarios duplicados"
+    task check_duplicated_users: :environment do
+      documents = User.all.map(&:document_number).compact
+      documents.count - documents.uniq.count
+      duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
+
+      if duplicated.present?
+        puts "Hay #{duplicated.count} DNIs que están duplicados"
+      else
+        puts "No hay usuarios duplicados"
+      end
+    end
+
     desc "Eliminar los usuarios duplicados con votos en los diferentes presupuestos"
     task duplicated_voters: :environment do
       print "Ejecutando script..."
@@ -292,12 +305,7 @@ namespace :data do
           case users_voted.count
           when 0
             # Si de los usuarios sin email no ha votado ninguno, se eliminan todos los usuarios excepto el último en ser creado.
-            last_created = Array(user_group.max_by(created_at))
-            other_users = user_group - last_created
-
-            other_users.each do |user|
-                users_to_delete.push(user)
-            end
+            users_to_delete += users_not_voted
           when 1
             # Si de los usuarios sin email solo ha votado uno, se mantiene ese y se borran los demás.    
             users_not_voted.each do |user|
@@ -322,6 +330,7 @@ namespace :data do
             other_voters.each do |user|
               users_to_delete.push(user)
             end
+            users_to_delete += users_not_voted
           end
         end
       end
@@ -330,7 +339,7 @@ namespace :data do
       users_to_delete.each do |user|
         user.destroy
       end
-      
+
       puts " ✅"
       puts "Ejecución completada correctamente"
     end
