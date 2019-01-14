@@ -5,7 +5,7 @@ namespace :data do
   namespace :budgets do
     desc "Comprobación final de que no quedan usuarios duplicados"
     task check_duplicated_users: :environment do
-      documents = User.all.map(&:document_number).compact
+      documents = User.with_deleted.map(&:document_number).compact
       documents.count - documents.uniq.count
       duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
 
@@ -19,12 +19,12 @@ namespace :data do
     desc "Eliminar los usuarios duplicados con votos en los diferentes presupuestos"
     task duplicated_voters: :environment do
       print "Ejecutando script..."
-      documents = User.all.map(&:document_number).compact
+      documents = User.with_deleted.map(&:document_number).compact
       documents.count - documents.uniq.count
       duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
 
       users_to_delete = []
-      groups = User.where(document_number: duplicated).group_by(&:document_number).values
+      groups = User.with_deleted.where(document_number: duplicated).group_by(&:document_number).values
       groups_2 = groups.select { |g| g.count == 2 }
       puts
       print "Tratando usuarios duplicados"
@@ -107,17 +107,18 @@ namespace :data do
 
       # Eliminando usuarios duplicados
       users_to_delete.each do |user|
-        user.destroy
+        Lock.where(user_id: user.id).delete_all
+        user.really_destroy!
       end
 
       puts " ✅"
       print "Tratando usuarios triplicados"
-      documents = User.all.map(&:document_number).compact
+      documents = User.with_deleted.map(&:document_number).compact
       documents.count - documents.uniq.count
       duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
 
       users_to_delete = []
-      groups = User.where(document_number: duplicated).group_by(&:document_number).values
+      groups = User.with_deleted.where(document_number: duplicated).group_by(&:document_number).values
       groups_3 = groups.select { |g| g.count == 3 }
 
       groups_3.each do |user_group|
@@ -224,17 +225,18 @@ namespace :data do
 
       # Eliminando usuarios triplicados
       users_to_delete.each do |user|
-        user.destroy
+        Lock.where(user_id: user.id).delete_all
+        user.really_destroy!
       end
 
       puts " ✅"
       print "Tratando usuarios cuadruplicados"
-      documents = User.all.map(&:document_number).compact
+      documents = User.with_deleted.map(&:document_number).compact
       documents.count - documents.uniq.count
       duplicated = documents.select{ |e| documents.count(e) > 1 }.uniq
 
       users_to_delete = []
-      groups = User.where(document_number: duplicated).group_by(&:document_number).values
+      groups = User.with_deleted.where(document_number: duplicated).group_by(&:document_number).values
       groups_4 = groups.select { |g| g.count == 4 }
 
       groups_4.each do |user_group|
@@ -337,7 +339,8 @@ namespace :data do
 
       # Eliminando usuarios cuadruplicados
       users_to_delete.each do |user|
-        user.destroy
+        Lock.where(user_id: user.id).delete_all
+        user.really_destroy!
       end
 
       puts " ✅"
@@ -385,13 +388,13 @@ namespace :data do
       p = Axlsx::Package.new
       wb = p.workbook
 
-      documents = User.all.map(&:document_number).compact
+      documents = User.with_deleted.map(&:document_number).compact
 
       # Obtenemos los documentos de los usuarios repetidos
       duplicated_documents = documents.select{ |e| documents.count(e) > 1 }.uniq
 
       # Obtenemos los usuarios duplicados
-      duplicated_users = User.where(document_number: duplicated_documents).order(:document_number, :id)
+      duplicated_users = User.with_deleted.where(document_number: duplicated_documents).order(:document_number, :id)
       wb.add_worksheet(name: "Usuarios duplicados") do |sheet|
         sheet.add_row [
           "DOCUMENTO",
