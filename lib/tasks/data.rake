@@ -32,7 +32,6 @@ namespace :data do
       # Eliminamos los usuarios
       User.transaction do
         User.deleted.each do |user_to_delete|
-          user_to_delete.lock.destroy if user_to_delete.lock.present?
           user_to_delete.really_destroy!
         end
       end
@@ -131,6 +130,8 @@ namespace :data do
 
       # Eliminando usuarios duplicados
       users_to_delete.each do |user|
+        user.failed_census_calls.destroy_all if user.failed_census_calls.present?
+        user.lock.destroy if user.lock.present?
         user.destroy
       end
 
@@ -248,6 +249,8 @@ namespace :data do
 
       # Eliminando usuarios triplicados
       users_to_delete.each do |user|
+        user.failed_census_calls.destroy_all if user.failed_census_calls.present?
+        user.lock.destroy if user.lock.present?
         user.destroy
       end
 
@@ -361,6 +364,8 @@ namespace :data do
 
       # Eliminando usuarios cuadruplicados
       users_to_delete.each do |user|
+        user.failed_census_calls.destroy_all if user.failed_census_calls.present?
+        user.lock.destroy if user.lock.present?
         user.destroy
       end
 
