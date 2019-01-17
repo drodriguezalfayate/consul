@@ -16,6 +16,30 @@ namespace :data do
       end
     end
 
+    desc "Eliminar los usuarios duplicados previamente eliminados"
+    task deleted_duplicated_users: :environment do
+      # Eliminamos definitivamente los usuarios que no han votado
+
+      print "Eliminando usuarios..."
+      deleted_users_ids_with_votes = Budget::Ballot.where(user_id: User.deleted.pluck(:id)).pluck(:user_id).uniq
+      deleted_users_with_votes = User.deleted.where(id: deleted_users_ids_with_votes)
+
+      deleted_users_with_votes.each do |duplicated_deleted_user|
+        current_user = User.find_by_document_number(duplicated_deleted_user.document_number)
+        current_user.take_votes_from(duplicated_deleted_user)
+      end
+
+      # Eliminamos los usuarios
+      User.transaction do
+        User.deleted.each do |user_to_delete|
+          user_to_delete.lock.destroy if user_to_delete.lock.present?
+          user_to_delete.really_destroy!
+        end
+      end
+      puts " ✅"
+      puts "Ejecución completada correctamente"
+    end
+
     desc "Eliminar los usuarios duplicados con votos en los diferentes presupuestos"
     task duplicated_voters: :environment do
       print "Ejecutando script..."
