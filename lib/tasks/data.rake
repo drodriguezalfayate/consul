@@ -365,7 +365,7 @@ namespace :data do
       end
 
       puts " ✅"
-      puts "Ejecución completada correctamente"
+      Rake::Task["data:budgets:deleted_duplicated_users"].invoke
     end
 
     desc "Obtener un excel con los datos de todas las votaciones"
