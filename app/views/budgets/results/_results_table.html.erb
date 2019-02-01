@@ -75,4 +75,38 @@
   	</ul>
     </p>
   <% end %>
+
+  <% if @budget.id == 2 %>
+    <h4>Gestión del saldo restante tras el proceso de votación</h4>
+
+        <p>Finalizado el proceso de votación ha quedado un saldo restante en cada zona que no ha podido asignarse a  propuestas ya que el valor económico de las mismas excedía la cuantía disponible.</p>
+        <p>Reunido el grupo motor de este proceso, se ha decidido destinar ese saldo restante de la siguiente manera:</p>
+
+        <ul>
+          <li>Zona Centro:</li>
+          <ul style="list-style-type: circle;">
+            <li>Se incrementa en 75.000€ el proyecto de “Mejoras en Movilidad, Mobiliario y Arbolado en San Andrés”, la dotación económica para este proyecto se eleva a 242.000€.</li>
+          </ul>
+          <li>Zona Esgueva 1:</li>
+          <ul style="list-style-type: circle;">
+            <li>Se desestima la propuesta "Ampliación acera y carril bici Av. Palencia de C/Penitenciaría a Paseo del Cauce", valorada en 216.000€ porque va a ser ejecutada con presupuesto corriente de 2018.</li>
+            <li>Se incorporan las siguientes propuestas:</li>
+            <ul style="list-style-type: square;">
+              <li>Reparaciones del Carril Bici Paseo Ribera de Castilla, valorada en 150.000€.</li>
+              <li>Remodelación de la Calle Quevedo, valorada en 66.000€.</li>
+            </ul>
+          </ul>
+          <li>Zona Esgueva 2:</li>
+          <ul style="list-style-type: circle;"><li>Se incorpora el proyecto “Marquesinas y Plazas de recreo en Plaza de las Nieves” valorado en 50.000€.</li></ul>
+          <li>Zona Este 2:</li>
+          <ul style="list-style-type: circle;"><li>Se incorpora el proyecto “Carril Bici Páramo San Isidro ( 1ª Fase Hasta Santa María de la Cabeza) valorado en 137.848€.</li></ul>
+        <li>Zona Parquesol:</li>
+          <ul style="list-style-type: circle;"><li>Se incorpora el proyecto “Parque Canino (CEIP Francisco Pino)” valorado en 40.000€.</li></ul>
+          <li>Zona Pisuerga 2:</li>
+          <ul style="list-style-type: circle;"><li>Se incorpora el proyecto “Arreglo Calle Juan II de Castilla”, valorado en 30.000€.</li></ul>
+          <li>Zona Sur 1:</li>
+          <ul style="list-style-type: circle;"><li>Se incorpora el proyecto ” Arreglo de Pavimento y Aceras de la Calle Ecuador”, valorado en 80.000€.</li></ul>
+        </ul>
+ 
+  <% end %>
 </div>
