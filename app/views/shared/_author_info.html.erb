@@ -1,4 +1,4 @@
-<% if resource.author.hidden? || resource.author.erased? %>
+<% if resource.author.blank? || resource.author.hidden? || resource.author.erased? %>
   <span class="icon-deleted author-deleted"></span>
   <span class="author deleted">
       <%= t("shared.author_info.author_deleted") %>
@@ -23,7 +23,7 @@
   <% end %>
 <% end %>
 
-<% if resource.author.verified_organization? %>
+<% if resource.author.present? && resource.author.verified_organization? %>
   &nbsp;&bull;&nbsp;
   <span class="label round is-association">
     <%= t("shared.collective") %>

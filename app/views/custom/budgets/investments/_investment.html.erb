@@ -13,7 +13,7 @@
             <%= l investment.created_at.to_date %>
             
             <% if !(@budget.balloting? || @budget.selecting?) %>
-              <% if investment.author.hidden? || investment.author.erased? %>
+              <% if investment.author.blank? || investment.author.hidden? || investment.author.erased? %>
                 <span class="bullet">&nbsp;&bull;&nbsp;</span>
                 <span class="author">
                   <%= t("budgets.investments.show.author_deleted") %>
