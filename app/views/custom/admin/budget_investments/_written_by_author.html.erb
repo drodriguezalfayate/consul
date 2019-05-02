@@ -39,3 +39,12 @@
 <% end %>
 
 <%= safe_html_with_links @investment.description %>
+
+<% if @investment.location.present? %>
+  <p>
+    <%= t("budgets.investments.show.location_html", location: @investment.location) %>
+  </p>
+<% end %>
+
+
+
