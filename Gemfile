@@ -54,7 +54,7 @@ gem 'daemons'
 gem 'devise-async'
 gem 'newrelic_rpm', '~> 4.1.0.333'
 gem 'whenever', require: false
-gem 'pg_search'
+gem 'pg_search', '~> 1.0.6'
 gem 'sitemap_generator', '~> 5.3.1'
 
 gem 'ahoy_matey', '~> 1.6.0'
@@ -111,4 +111,7 @@ gem 'omniauth-codigo', :path => './omniauth-codigo'
 gem 'rest-client'
 gem 'httparty'
 
-eval_gemfile './Gemfile_custom'
+custom_path = ENV['HOME'] + '/consul/Gemfile_custom'
+
+eval_gemfile custom_path 
+#eval_gemfile '/home/siglo21/consul/Gemfile_custom' 
