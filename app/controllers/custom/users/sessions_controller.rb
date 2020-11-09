@@ -57,14 +57,21 @@ class Users::SessionsController < Devise::SessionsController
       unless user_signed_in?
         @ip = request.remote_ip
         @managementIps = nil
+        Rails.logger.info 'IP remota: '+@ip
         if(Rails.application.config.respond_to?(:participacion_management_ip))
           @managementIps = Rails.application.config.participacion_management_ip
         end
         if(Rails.application.config.respond_to?(:participacion_renegotiation))
           @redirect = Rails.application.config.participacion_renegotiation
         end
+        Rails.logger.info 'IP de gestión' +@managementIps;
+        Rails.logger.info 'IP de redirección '+@redirect;
 
         if(@redirect!=nil)
+          Rails.logger.info 'IP de redirección no nula, verificando IPs de gestión'
+          if(@managementIps!=nil)
+            @managementIps.split(';').each{|m| Rails.logger.info 'Verificando ['+@ip+'] con ['+m.strip'] equals? '+m.strip == @ip }
+
           if(@managementIps==nil || @managementIps.split(';').none?{|m| m.strip == @ip })
             redirect_to @redirect, :status => 302
           end
