@@ -37,7 +37,8 @@ class ExternalUserController < ApplicationController
       # El secreto y el origen valido almacenado
       secret = nil
       origin = nil
-      Rails.logger.info 'Tenemos xauth-token: ['+xauth+'] con ip remota: '+ip;
+      Rails.logger.debug "verify_participacion_token: Tenemos xauth-token: [#{xauth}] con ip remota: #{ip}"
+      Rails.logger.debug "verify_participacion_token: La ip de cliente es: #{request.ip}"
 
       if(Rails.application.config.respond_to?(:participacion_xauth_secret))
         secret = Rails.application.config.participacion_xauth_secret.strip
@@ -46,23 +47,24 @@ class ExternalUserController < ApplicationController
         origin = Rails.application.config.participacion_xauth_origin.strip
       end
 
-      Rails.logger.info 'Comprobando xauth-token: ['+(secret == xauth)+'] con ip remota registrada: ['+origin+']'
+      Rails.logger.debug "verify_participacion_token: Comprobando xauth-token: [#{(secret == xauth)}] con ip remota registrada: [#{origin}]"
 
       # Verificamos que tenemos todos los datos
       if (secret == nil || origin == nil || xauth == nil || xauth != secret)
-        Rails.logger.info 'Alguno de los datos es nulo o el secreto no es válido'
+        Rails.logger.debug "verify_participacion_token: Alguno de los datos es nulo o el secreto no es válido"
         render plain: 'unknown', status: :not_found
         return
       end
 
-      origin.split(';').each{|m| Rails.logger.info 'Verificando ['+ip+'] con ['+m.strip'] equals? '+m.strip == ip }
+      origin.split(';').each{|m| Rails.logger.debug "verifyIp: --- evaluando [#{m.strip}] #{(m.strip == ip)}"}
 
       # Ahora comprobamos... si alguna ip coincide
       if(origin.split(';').none? {|m| m.strip == ip})
-        Rails.logger.info 'No hay coincidencia de IPs'
+        Rails.logger.debug "verify_participacion_token: No hay coincidencia de IPs"
         render plain: 'unknown', status: :not_found
         return
       end
+      Rails.logger.debug "verify_participacion_token: Success"
 
     end
 
